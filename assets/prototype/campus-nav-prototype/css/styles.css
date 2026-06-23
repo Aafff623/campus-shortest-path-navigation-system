@@ -64,6 +64,24 @@ body {
   min-height: 100vh;
 }
 
+/* 主题切换时让颜色/背景/边框等跟随 CSS 变量平滑过渡（不追求所有属性） */
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    transition: background-color 250ms ease, color 250ms ease;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: background-color 250ms ease,
+                color 250ms ease,
+                border-color 250ms ease,
+                box-shadow 250ms ease,
+                fill 250ms ease,
+                stroke 250ms ease;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;
