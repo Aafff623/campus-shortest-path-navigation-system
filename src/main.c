@@ -3,8 +3,9 @@
 #include "graph.h"
 #include "dijkstra.h"
 
-#define VERSION "0.3.0"
+#define VERSION "0.4.0"
 #define EXPORT_PATH "assets/data/routes.json"
+#define EXPORT_MIRROR_PATH "assets/prototype/campus-nav-prototype/data/routes.json"
 
 static void print_welcome(void)
 {
@@ -81,6 +82,22 @@ static int do_query(Graph *g)
     return 1;
 }
 
+/* 简易 JSON 字符串转义：仅处理 ASCII 安全字符 + 中文。足够地点名场景。 */
+static void fprint_json_string(FILE *fp, const char *s)
+{
+    fputc('"', fp);
+    for (const unsigned char *p = (const unsigned char *)s; *p; p++) {
+        unsigned char c = *p;
+        if (c == '"') fputs("\\\"", fp);
+        else if (c == '\\') fputs("\\\\", fp);
+        else if (c == '\n') fputs("\\n", fp);
+        else if (c == '\r') fputs("\\r", fp);
+        else if (c == '\t') fputs("\\t", fp);
+        else fputc(c, fp);
+    }
+    fputc('"', fp);
+}
+
 static int export_routes_json(const Graph *g, const char *path)
 {
     FILE *fp = fopen(path, "w");
@@ -92,17 +109,58 @@ static int export_routes_json(const Graph *g, const char *path)
     fprintf(fp, "{\n");
     fprintf(fp, "  \"places\": [\n");
     for (int i = 0; i < PLACE_COUNT; i++) {
-        fprintf(fp,
-                "    {\"id\": \"%s\", \"name\": \"%s\", \"type\": \"%s\", \"icon\": \"%s\", \"x\": %d, \"y\": %d}%s\n",
-                g->ids[i], g->names[i], g->types[i], g->icons[i], g->coord_x[i], g->coord_y[i],
-                (i == PLACE_COUNT - 1) ? "" : ",");
+        fprintf(fp, "    {");
+        fprint_json_string(fp, "id"); fprintf(fp, ": ");
+        fprint_json_string(fp, g->ids[i]); fprintf(fp, ", ");
+        fprint_json_string(fp, "name"); fprintf(fp, ": ");
+        fprint_json_string(fp, g->names[i]); fprintf(fp, ", ");
+        fprint_json_string(fp, "type"); fprintf(fp, ": ");
+        fprint_json_string(fp, g->types[i]); fprintf(fp, ", ");
+        fprint_json_string(fp, "icon"); fprintf(fp, ": ");
+        fprint_json_string(fp, g->icons[i]); fprintf(fp, ", ");
+        fprint_json_string(fp, "x"); fprintf(fp, ": %d, ", g->coord_x[i]);
+        fprint_json_string(fp, "y"); fprintf(fp, ": %d}", g->coord_y[i]);
+        if (i != PLACE_COUNT - 1) fputc(',', fp);
+        fputc('\n', fp);
     }
     fprintf(fp, "  ],\n");
-    fprintf(fp, "  \"routes\": []\n");
+
+    /* 预计算所有 (i, j) i≠j 的最短路径 */
+    fprintf(fp, "  \"routes\": [\n");
+    int total = 0;
+    int first = 1;
+    for (int i = 0; i < PLACE_COUNT; i++) {
+        for (int j = 0; j < PLACE_COUNT; j++) {
+            if (i == j) continue;
+            DijkstraResult r = dijkstra_shortest_path(g, i, j);
+            if (r.distance == DIJKSTRA_UNREACH || r.path_len == 0) continue;
+
+            if (!first) fputc(',', fp);
+            fputc('\n', fp);
+            first = 0;
+
+            fprintf(fp, "    {");
+            fprint_json_string(fp, "start"); fprintf(fp, ": ");
+            fprint_json_string(fp, g->ids[i]); fprintf(fp, ", ");
+            fprint_json_string(fp, "end"); fprintf(fp, ": ");
+            fprint_json_string(fp, g->ids[j]); fprintf(fp, ", ");
+            fprint_json_string(fp, "distance"); fprintf(fp, ": %d, ", r.distance);
+            fprint_json_string(fp, "path"); fprintf(fp, ": [");
+            for (int k = 0; k < r.path_len; k++) {
+                if (k > 0) fputc(',', fp);
+                fputc(' ', fp);
+                fprint_json_string(fp, g->ids[r.path[k]]);
+            }
+            fputs(" ]}", fp);
+            total++;
+        }
+    }
+    if (total > 0) fputc('\n', fp);
+    fprintf(fp, "  ]\n");
     fprintf(fp, "}\n");
 
     fclose(fp);
-    printf("已导出 %d 个地点到 %s\n", PLACE_COUNT, path);
+    printf("已导出 %d 个地点、%d 条最短路径到 %s\n", PLACE_COUNT, total, path);
     return 0;
 }
 
@@ -136,7 +194,12 @@ int main(int argc, char *argv[])
     }
 
     if (export_mode) {
-        return export_routes_json(&g, EXPORT_PATH);
+        if (export_routes_json(&g, EXPORT_PATH) != 0) return 1;
+        /* 同步到前端 dev 用的 mirror（C 端的 source of truth 仍是 EXPORT_PATH） */
+        if (strcmp(EXPORT_PATH, EXPORT_MIRROR_PATH) != 0) {
+            return export_routes_json(&g, EXPORT_MIRROR_PATH);
+        }
+        return 0;
     }
 
     print_welcome();

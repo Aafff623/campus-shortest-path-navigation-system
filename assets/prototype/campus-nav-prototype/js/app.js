@@ -37,7 +37,8 @@ let dataSource = 'fallback';   // 'c-program' | 'fallback'
 /* 加载 C 程序输出的 JSON（异步）。失败/未找到时使用 fallback。 */
 async function loadCProgramData() {
   try {
-    const res = await fetch('data/routes.json');
+    /* 加 cache buster，避免 dev 期 HTTP 304 让 routes 看起来仍是空数组 */
+    const res = await fetch('data/routes.json?_=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const json = await res.json();
     if (Array.isArray(json.places) && json.places.length > 0) {
