@@ -17,9 +17,12 @@
 
 ## 技术栈
 
-- 前端：纯静态 HTML / CSS / JavaScript（原型已提供）
-- 算法实现：C / Java / Python 任选其一（按课程要求）
-- 构建工具：按需使用，不强制
+- 前端：纯静态 HTML / CSS / JavaScript，读取 C 程序导出的 `assets/data/routes.json`
+- 算法后端：C（C99 标准）
+- 数据结构：邻接矩阵/邻接表存储无向带权图
+- 核心算法：Dijkstra（Floyd 可作为扩展）
+- 数据交换：JSON（`assets/data/routes.json`）
+- 构建工具：gcc / MinGW + Makefile
 - 版本控制：Git + GitHub private repo + Conventional Commits
   - 远程仓库：`https://github.com/Aafff623/campus-shortest-path-navigation-system`
   - 详细流程见 `docs/handoff/git-workflow.md`
@@ -29,7 +32,9 @@
 ```
 .
 ├── assets/                 # 静态资产
+│   ├── data/               # C 程序导出的 routes.json
 │   └── prototype/          # 前端静态原型（来自 campus-nav-prototype.zip）
+├── bin/                    # 编译产物
 ├── docs/                   # 文档资料
 │   ├── agents/             # Matt Pocock 技能配置
 │   ├── adr/                # 架构决策记录
@@ -37,10 +42,13 @@
 │   ├── 原始资料/           # 老师下发的任务书、原始需求
 │   ├── handoff/            # 交接与运行说明
 │   └── reports/            # 课程设计说明书、测试报告、截图
-├── src/                    # 后端/算法源码（待创建）
-├── tests/                  # 测试用例（待创建）
+├── src/                    # C 源码
+├── tests/                  # 测试用例
+├── Makefile                # 构建脚本
 ├── requirements.md         # 整理后的需求文档
 ├── requirements.txt        # 任务书文本副本
+├── PRD-校园最短路径导航系统.md  # 产品需求文档
+├── CONTEXT.md              # 领域上下文
 ├── CLAUDE.md               # 本文件
 └── README.md               # 项目总览
 ```

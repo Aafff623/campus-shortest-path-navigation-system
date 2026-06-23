@@ -9,12 +9,13 @@
 | 1 | [setup-c-project](./setup-c-project/) | `ready-for-agent` | - |
 | 2 | [graph-data-structure](./graph-data-structure/) | `ready-for-agent` | #1 |
 | 3 | [dijkstra-algorithm](./dijkstra-algorithm/) | `ready-for-agent` | #2 |
-| 4 | [cli-menu-query](./cli-menu-query/) | `ready-for-agent` | #2 |
-| 5 | [input-validation](./input-validation/) | `ready-for-agent` | #4 |
-| 6 | [test-cases](./test-cases/) | `ready-for-agent` | #3, #5 |
-| 7 | [frontend-prototype](./frontend-prototype/) | `ready-for-agent` | - |
-| 8 | [course-design-report](./course-design-report/) | `ready-for-agent` | #6, #7 |
-| 9 | [final-review](./final-review/) | `ready-for-human` | #8 |
+| 4 | [export-json](./export-json/) | `ready-for-agent` | #3 |
+| 5 | [cli-menu-query](./cli-menu-query/) | `ready-for-agent` | #2 |
+| 6 | [input-validation](./input-validation/) | `ready-for-agent` | #5 |
+| 7 | [test-cases](./test-cases/) | `ready-for-agent` | #4, #6 |
+| 8 | [frontend-prototype](./frontend-prototype/) | `ready-for-agent` | #4 |
+| 9 | [course-design-report](./course-design-report/) | `ready-for-agent` | #7, #8 |
+| 10 | [final-review](./final-review/) | `ready-for-human` | #9 |
 
 ## 工作流
 
@@ -25,6 +26,13 @@
    - 更新状态为 `completed`。
    - 执行 `git push origin main` 推送到 GitHub。
 5. **未经 review 不要 push**。
+
+## 数据流通
+
+```
+C 程序 --export → assets/data/routes.json
+前端页面 fetch → 渲染地图、路径、距离
+```
 
 ## Git 命令参考
 
