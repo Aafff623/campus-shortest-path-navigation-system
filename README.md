@@ -18,13 +18,13 @@
 
 1. 查看整理后的需求：`requirements.md`
 2. 查看前端原型：`assets/prototype/index.html`（可直接用浏览器打开）
-3. 查看任务书原件：`Docs/原始资料/课程设计任务书.doc`
+3. 查看任务书原件：`docs/原始资料/课程设计任务书.doc`
 
 ## 目录结构
 
 ```
 ├── assets/prototype/   # 前端静态原型
-├── Docs/               # 文档与资料
+├── docs/               # 文档与资料
 │   ├── backup/         # 备份
 │   ├── 原始资料/       # 任务书等原始文件
 │   ├── handoff/        # 交接说明
@@ -47,4 +47,4 @@
 ## 交付物
 
 - 可运行程序 + 源码
-- 课程设计说明书（放入 `Docs/reports/`）
+- 课程设计说明书（放入 `docs/reports/`）
