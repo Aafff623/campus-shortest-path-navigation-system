@@ -191,9 +191,10 @@
 
 ## 9. 仍待办
 
-- **任务 #4**：C 端 `--export` 生成 routes.json 的 `routes` 数组
+- ~~**任务 #4**：C 端 `--export` 生成 routes.json 的 `routes` 数组~~ ✅ 已完成（commit `dbe26d4`，详见 `backend-export-routes.md`）
+- **任务 #39**：亮暗色切换渐变动画
 - **任务 #9**：课程设计说明书
-- 远程 main 分支与 master 同步（当前 master 领先 main 4 commit）
+- 远程 main 分支与 master 同步（当前 master 领先 main 7 commit）
 
 ## 10. 截图清单
 
@@ -206,3 +207,8 @@ phase2-light-v2.png Phase 2 第二次 light（最终）
 phase4-light.png    Phase 4 验收 light
 phase4-dark.png     Phase 4 验收 dark
 ```
+
+## 11. 后续关联
+
+- 数据管理弹窗 + code-block + 主题按钮重命名：见 `frontend-data-dialog.md`（commit `2c6e58d`）
+- C 端 routes 预计算 + 同步：见 `backend-export-routes.md`（commit `dbe26d4`）
