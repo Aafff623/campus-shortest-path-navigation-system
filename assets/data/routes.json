@@ -1,88 +1,855 @@
 {
   "places": [
-    {"id": "teaching", "name": "教学楼", "type": "教学区域", "icon": "🏫", "x": 145, "y": 95},
-    {"id": "library", "name": "图书馆", "type": "学习场所", "icon": "📚", "x": 345, "y": 82},
-    {"id": "canteen", "name": "食堂", "type": "生活服务", "icon": "🍽️", "x": 520, "y": 152},
-    {"id": "dorm", "name": "宿舍区", "type": "生活区域", "icon": "🏠", "x": 210, "y": 275},
-    {"id": "gym", "name": "体育馆", "type": "体育设施", "icon": "🏟️", "x": 430, "y": 292},
-    {"id": "lab", "name": "实验楼", "type": "教学区域", "icon": "🧪", "x": 675, "y": 255},
-    {"id": "hospital", "name": "校医院", "type": "公共服务", "icon": "🏥", "x": 620, "y": 82},
-    {"id": "office", "name": "行政楼", "type": "办公区域", "icon": "🏢", "x": 95, "y": 230},
-    {"id": "playground", "name": "操场", "type": "体育设施", "icon": "🌿", "x": 320, "y": 185}
+    {
+      "id": "teaching",
+      "name": "教学楼",
+      "type": "教学区域",
+      "icon": "🏫",
+      "x": 145,
+      "y": 95
+    },
+    {
+      "id": "library",
+      "name": "图书馆",
+      "type": "学习场所",
+      "icon": "📚",
+      "x": 345,
+      "y": 82
+    },
+    {
+      "id": "canteen",
+      "name": "食堂",
+      "type": "生活服务",
+      "icon": "🍽️",
+      "x": 520,
+      "y": 152
+    },
+    {
+      "id": "dorm",
+      "name": "宿舍区",
+      "type": "生活区域",
+      "icon": "🏠",
+      "x": 210,
+      "y": 275
+    },
+    {
+      "id": "gym",
+      "name": "体育馆",
+      "type": "体育设施",
+      "icon": "🏟️",
+      "x": 430,
+      "y": 292
+    },
+    {
+      "id": "lab",
+      "name": "实验楼",
+      "type": "教学区域",
+      "icon": "🧪",
+      "x": 675,
+      "y": 255
+    },
+    {
+      "id": "hospital",
+      "name": "校医院",
+      "type": "公共服务",
+      "icon": "🏥",
+      "x": 620,
+      "y": 82
+    },
+    {
+      "id": "office",
+      "name": "行政楼",
+      "type": "办公区域",
+      "icon": "🏢",
+      "x": 95,
+      "y": 230
+    },
+    {
+      "id": "playground",
+      "name": "操场",
+      "type": "体育设施",
+      "icon": "🌿",
+      "x": 320,
+      "y": 185
+    }
   ],
   "routes": [
-
-    {"start": "teaching", "end": "library", "distance": 220, "path": [ "teaching", "library" ]},
-    {"start": "teaching", "end": "canteen", "distance": 430, "path": [ "teaching", "library", "canteen" ]},
-    {"start": "teaching", "end": "dorm", "distance": 350, "path": [ "teaching", "office", "dorm" ]},
-    {"start": "teaching", "end": "gym", "distance": 430, "path": [ "teaching", "playground", "gym" ]},
-    {"start": "teaching", "end": "lab", "distance": 670, "path": [ "teaching", "library", "canteen", "lab" ]},
-    {"start": "teaching", "end": "hospital", "distance": 520, "path": [ "teaching", "library", "hospital" ]},
-    {"start": "teaching", "end": "office", "distance": 180, "path": [ "teaching", "office" ]},
-    {"start": "teaching", "end": "playground", "distance": 260, "path": [ "teaching", "playground" ]},
-    {"start": "library", "end": "teaching", "distance": 220, "path": [ "library", "teaching" ]},
-    {"start": "library", "end": "canteen", "distance": 210, "path": [ "library", "canteen" ]},
-    {"start": "library", "end": "dorm", "distance": 300, "path": [ "library", "playground", "dorm" ]},
-    {"start": "library", "end": "gym", "distance": 310, "path": [ "library", "playground", "gym" ]},
-    {"start": "library", "end": "lab", "distance": 450, "path": [ "library", "canteen", "lab" ]},
-    {"start": "library", "end": "hospital", "distance": 300, "path": [ "library", "hospital" ]},
-    {"start": "library", "end": "office", "distance": 370, "path": [ "library", "playground", "office" ]},
-    {"start": "library", "end": "playground", "distance": 140, "path": [ "library", "playground" ]},
-    {"start": "canteen", "end": "teaching", "distance": 430, "path": [ "canteen", "library", "teaching" ]},
-    {"start": "canteen", "end": "library", "distance": 210, "path": [ "canteen", "library" ]},
-    {"start": "canteen", "end": "dorm", "distance": 450, "path": [ "canteen", "gym", "dorm" ]},
-    {"start": "canteen", "end": "gym", "distance": 190, "path": [ "canteen", "gym" ]},
-    {"start": "canteen", "end": "lab", "distance": 240, "path": [ "canteen", "lab" ]},
-    {"start": "canteen", "end": "hospital", "distance": 450, "path": [ "canteen", "lab", "hospital" ]},
-    {"start": "canteen", "end": "office", "distance": 580, "path": [ "canteen", "library", "playground", "office" ]},
-    {"start": "canteen", "end": "playground", "distance": 350, "path": [ "canteen", "library", "playground" ]},
-    {"start": "dorm", "end": "teaching", "distance": 350, "path": [ "dorm", "office", "teaching" ]},
-    {"start": "dorm", "end": "library", "distance": 300, "path": [ "dorm", "playground", "library" ]},
-    {"start": "dorm", "end": "canteen", "distance": 450, "path": [ "dorm", "gym", "canteen" ]},
-    {"start": "dorm", "end": "gym", "distance": 260, "path": [ "dorm", "gym" ]},
-    {"start": "dorm", "end": "lab", "distance": 540, "path": [ "dorm", "gym", "lab" ]},
-    {"start": "dorm", "end": "hospital", "distance": 600, "path": [ "dorm", "playground", "library", "hospital" ]},
-    {"start": "dorm", "end": "office", "distance": 170, "path": [ "dorm", "office" ]},
-    {"start": "dorm", "end": "playground", "distance": 160, "path": [ "dorm", "playground" ]},
-    {"start": "gym", "end": "teaching", "distance": 430, "path": [ "gym", "playground", "teaching" ]},
-    {"start": "gym", "end": "library", "distance": 310, "path": [ "gym", "playground", "library" ]},
-    {"start": "gym", "end": "canteen", "distance": 190, "path": [ "gym", "canteen" ]},
-    {"start": "gym", "end": "dorm", "distance": 260, "path": [ "gym", "dorm" ]},
-    {"start": "gym", "end": "lab", "distance": 280, "path": [ "gym", "lab" ]},
-    {"start": "gym", "end": "hospital", "distance": 490, "path": [ "gym", "lab", "hospital" ]},
-    {"start": "gym", "end": "office", "distance": 400, "path": [ "gym", "playground", "office" ]},
-    {"start": "gym", "end": "playground", "distance": 170, "path": [ "gym", "playground" ]},
-    {"start": "lab", "end": "teaching", "distance": 670, "path": [ "lab", "canteen", "library", "teaching" ]},
-    {"start": "lab", "end": "library", "distance": 450, "path": [ "lab", "canteen", "library" ]},
-    {"start": "lab", "end": "canteen", "distance": 240, "path": [ "lab", "canteen" ]},
-    {"start": "lab", "end": "dorm", "distance": 540, "path": [ "lab", "gym", "dorm" ]},
-    {"start": "lab", "end": "gym", "distance": 280, "path": [ "lab", "gym" ]},
-    {"start": "lab", "end": "hospital", "distance": 210, "path": [ "lab", "hospital" ]},
-    {"start": "lab", "end": "office", "distance": 680, "path": [ "lab", "gym", "playground", "office" ]},
-    {"start": "lab", "end": "playground", "distance": 450, "path": [ "lab", "gym", "playground" ]},
-    {"start": "hospital", "end": "teaching", "distance": 520, "path": [ "hospital", "library", "teaching" ]},
-    {"start": "hospital", "end": "library", "distance": 300, "path": [ "hospital", "library" ]},
-    {"start": "hospital", "end": "canteen", "distance": 450, "path": [ "hospital", "lab", "canteen" ]},
-    {"start": "hospital", "end": "dorm", "distance": 600, "path": [ "hospital", "library", "playground", "dorm" ]},
-    {"start": "hospital", "end": "gym", "distance": 490, "path": [ "hospital", "lab", "gym" ]},
-    {"start": "hospital", "end": "lab", "distance": 210, "path": [ "hospital", "lab" ]},
-    {"start": "hospital", "end": "office", "distance": 670, "path": [ "hospital", "library", "playground", "office" ]},
-    {"start": "hospital", "end": "playground", "distance": 440, "path": [ "hospital", "library", "playground" ]},
-    {"start": "office", "end": "teaching", "distance": 180, "path": [ "office", "teaching" ]},
-    {"start": "office", "end": "library", "distance": 370, "path": [ "office", "playground", "library" ]},
-    {"start": "office", "end": "canteen", "distance": 580, "path": [ "office", "playground", "library", "canteen" ]},
-    {"start": "office", "end": "dorm", "distance": 170, "path": [ "office", "dorm" ]},
-    {"start": "office", "end": "gym", "distance": 400, "path": [ "office", "playground", "gym" ]},
-    {"start": "office", "end": "lab", "distance": 680, "path": [ "office", "playground", "gym", "lab" ]},
-    {"start": "office", "end": "hospital", "distance": 670, "path": [ "office", "playground", "library", "hospital" ]},
-    {"start": "office", "end": "playground", "distance": 230, "path": [ "office", "playground" ]},
-    {"start": "playground", "end": "teaching", "distance": 260, "path": [ "playground", "teaching" ]},
-    {"start": "playground", "end": "library", "distance": 140, "path": [ "playground", "library" ]},
-    {"start": "playground", "end": "canteen", "distance": 350, "path": [ "playground", "library", "canteen" ]},
-    {"start": "playground", "end": "dorm", "distance": 160, "path": [ "playground", "dorm" ]},
-    {"start": "playground", "end": "gym", "distance": 170, "path": [ "playground", "gym" ]},
-    {"start": "playground", "end": "lab", "distance": 450, "path": [ "playground", "gym", "lab" ]},
-    {"start": "playground", "end": "hospital", "distance": 440, "path": [ "playground", "library", "hospital" ]},
-    {"start": "playground", "end": "office", "distance": 230, "path": [ "playground", "office" ]}
+    {
+      "start": "teaching",
+      "end": "library",
+      "distance": 220,
+      "path": [
+        "teaching",
+        "library"
+      ]
+    },
+    {
+      "start": "teaching",
+      "end": "canteen",
+      "distance": 430,
+      "path": [
+        "teaching",
+        "library",
+        "canteen"
+      ]
+    },
+    {
+      "start": "teaching",
+      "end": "dorm",
+      "distance": 350,
+      "path": [
+        "teaching",
+        "office",
+        "dorm"
+      ]
+    },
+    {
+      "start": "teaching",
+      "end": "gym",
+      "distance": 430,
+      "path": [
+        "teaching",
+        "playground",
+        "gym"
+      ]
+    },
+    {
+      "start": "teaching",
+      "end": "lab",
+      "distance": 670,
+      "path": [
+        "teaching",
+        "library",
+        "canteen",
+        "lab"
+      ]
+    },
+    {
+      "start": "teaching",
+      "end": "hospital",
+      "distance": 520,
+      "path": [
+        "teaching",
+        "library",
+        "hospital"
+      ]
+    },
+    {
+      "start": "teaching",
+      "end": "office",
+      "distance": 180,
+      "path": [
+        "teaching",
+        "office"
+      ]
+    },
+    {
+      "start": "teaching",
+      "end": "playground",
+      "distance": 260,
+      "path": [
+        "teaching",
+        "playground"
+      ]
+    },
+    {
+      "start": "library",
+      "end": "teaching",
+      "distance": 220,
+      "path": [
+        "library",
+        "teaching"
+      ]
+    },
+    {
+      "start": "library",
+      "end": "canteen",
+      "distance": 210,
+      "path": [
+        "library",
+        "canteen"
+      ]
+    },
+    {
+      "start": "library",
+      "end": "dorm",
+      "distance": 300,
+      "path": [
+        "library",
+        "playground",
+        "dorm"
+      ]
+    },
+    {
+      "start": "library",
+      "end": "gym",
+      "distance": 310,
+      "path": [
+        "library",
+        "playground",
+        "gym"
+      ]
+    },
+    {
+      "start": "library",
+      "end": "lab",
+      "distance": 450,
+      "path": [
+        "library",
+        "canteen",
+        "lab"
+      ]
+    },
+    {
+      "start": "library",
+      "end": "hospital",
+      "distance": 300,
+      "path": [
+        "library",
+        "hospital"
+      ]
+    },
+    {
+      "start": "library",
+      "end": "office",
+      "distance": 370,
+      "path": [
+        "library",
+        "playground",
+        "office"
+      ]
+    },
+    {
+      "start": "library",
+      "end": "playground",
+      "distance": 140,
+      "path": [
+        "library",
+        "playground"
+      ]
+    },
+    {
+      "start": "canteen",
+      "end": "teaching",
+      "distance": 430,
+      "path": [
+        "canteen",
+        "library",
+        "teaching"
+      ]
+    },
+    {
+      "start": "canteen",
+      "end": "library",
+      "distance": 210,
+      "path": [
+        "canteen",
+        "library"
+      ]
+    },
+    {
+      "start": "canteen",
+      "end": "dorm",
+      "distance": 450,
+      "path": [
+        "canteen",
+        "gym",
+        "dorm"
+      ]
+    },
+    {
+      "start": "canteen",
+      "end": "gym",
+      "distance": 190,
+      "path": [
+        "canteen",
+        "gym"
+      ]
+    },
+    {
+      "start": "canteen",
+      "end": "lab",
+      "distance": 240,
+      "path": [
+        "canteen",
+        "lab"
+      ]
+    },
+    {
+      "start": "canteen",
+      "end": "hospital",
+      "distance": 450,
+      "path": [
+        "canteen",
+        "lab",
+        "hospital"
+      ]
+    },
+    {
+      "start": "canteen",
+      "end": "office",
+      "distance": 580,
+      "path": [
+        "canteen",
+        "library",
+        "playground",
+        "office"
+      ]
+    },
+    {
+      "start": "canteen",
+      "end": "playground",
+      "distance": 350,
+      "path": [
+        "canteen",
+        "library",
+        "playground"
+      ]
+    },
+    {
+      "start": "dorm",
+      "end": "teaching",
+      "distance": 350,
+      "path": [
+        "dorm",
+        "office",
+        "teaching"
+      ]
+    },
+    {
+      "start": "dorm",
+      "end": "library",
+      "distance": 300,
+      "path": [
+        "dorm",
+        "playground",
+        "library"
+      ]
+    },
+    {
+      "start": "dorm",
+      "end": "canteen",
+      "distance": 450,
+      "path": [
+        "dorm",
+        "gym",
+        "canteen"
+      ]
+    },
+    {
+      "start": "dorm",
+      "end": "gym",
+      "distance": 260,
+      "path": [
+        "dorm",
+        "gym"
+      ]
+    },
+    {
+      "start": "dorm",
+      "end": "lab",
+      "distance": 540,
+      "path": [
+        "dorm",
+        "gym",
+        "lab"
+      ]
+    },
+    {
+      "start": "dorm",
+      "end": "hospital",
+      "distance": 600,
+      "path": [
+        "dorm",
+        "playground",
+        "library",
+        "hospital"
+      ]
+    },
+    {
+      "start": "dorm",
+      "end": "office",
+      "distance": 170,
+      "path": [
+        "dorm",
+        "office"
+      ]
+    },
+    {
+      "start": "dorm",
+      "end": "playground",
+      "distance": 160,
+      "path": [
+        "dorm",
+        "playground"
+      ]
+    },
+    {
+      "start": "gym",
+      "end": "teaching",
+      "distance": 430,
+      "path": [
+        "gym",
+        "playground",
+        "teaching"
+      ]
+    },
+    {
+      "start": "gym",
+      "end": "library",
+      "distance": 310,
+      "path": [
+        "gym",
+        "playground",
+        "library"
+      ]
+    },
+    {
+      "start": "gym",
+      "end": "canteen",
+      "distance": 190,
+      "path": [
+        "gym",
+        "canteen"
+      ]
+    },
+    {
+      "start": "gym",
+      "end": "dorm",
+      "distance": 260,
+      "path": [
+        "gym",
+        "dorm"
+      ]
+    },
+    {
+      "start": "gym",
+      "end": "lab",
+      "distance": 280,
+      "path": [
+        "gym",
+        "lab"
+      ]
+    },
+    {
+      "start": "gym",
+      "end": "hospital",
+      "distance": 490,
+      "path": [
+        "gym",
+        "lab",
+        "hospital"
+      ]
+    },
+    {
+      "start": "gym",
+      "end": "office",
+      "distance": 400,
+      "path": [
+        "gym",
+        "playground",
+        "office"
+      ]
+    },
+    {
+      "start": "gym",
+      "end": "playground",
+      "distance": 170,
+      "path": [
+        "gym",
+        "playground"
+      ]
+    },
+    {
+      "start": "lab",
+      "end": "teaching",
+      "distance": 670,
+      "path": [
+        "lab",
+        "canteen",
+        "library",
+        "teaching"
+      ]
+    },
+    {
+      "start": "lab",
+      "end": "library",
+      "distance": 450,
+      "path": [
+        "lab",
+        "canteen",
+        "library"
+      ]
+    },
+    {
+      "start": "lab",
+      "end": "canteen",
+      "distance": 240,
+      "path": [
+        "lab",
+        "canteen"
+      ]
+    },
+    {
+      "start": "lab",
+      "end": "dorm",
+      "distance": 540,
+      "path": [
+        "lab",
+        "gym",
+        "dorm"
+      ]
+    },
+    {
+      "start": "lab",
+      "end": "gym",
+      "distance": 280,
+      "path": [
+        "lab",
+        "gym"
+      ]
+    },
+    {
+      "start": "lab",
+      "end": "hospital",
+      "distance": 210,
+      "path": [
+        "lab",
+        "hospital"
+      ]
+    },
+    {
+      "start": "lab",
+      "end": "office",
+      "distance": 680,
+      "path": [
+        "lab",
+        "gym",
+        "playground",
+        "office"
+      ]
+    },
+    {
+      "start": "lab",
+      "end": "playground",
+      "distance": 450,
+      "path": [
+        "lab",
+        "gym",
+        "playground"
+      ]
+    },
+    {
+      "start": "hospital",
+      "end": "teaching",
+      "distance": 520,
+      "path": [
+        "hospital",
+        "library",
+        "teaching"
+      ]
+    },
+    {
+      "start": "hospital",
+      "end": "library",
+      "distance": 300,
+      "path": [
+        "hospital",
+        "library"
+      ]
+    },
+    {
+      "start": "hospital",
+      "end": "canteen",
+      "distance": 450,
+      "path": [
+        "hospital",
+        "lab",
+        "canteen"
+      ]
+    },
+    {
+      "start": "hospital",
+      "end": "dorm",
+      "distance": 600,
+      "path": [
+        "hospital",
+        "library",
+        "playground",
+        "dorm"
+      ]
+    },
+    {
+      "start": "hospital",
+      "end": "gym",
+      "distance": 490,
+      "path": [
+        "hospital",
+        "lab",
+        "gym"
+      ]
+    },
+    {
+      "start": "hospital",
+      "end": "lab",
+      "distance": 210,
+      "path": [
+        "hospital",
+        "lab"
+      ]
+    },
+    {
+      "start": "hospital",
+      "end": "office",
+      "distance": 670,
+      "path": [
+        "hospital",
+        "library",
+        "playground",
+        "office"
+      ]
+    },
+    {
+      "start": "hospital",
+      "end": "playground",
+      "distance": 440,
+      "path": [
+        "hospital",
+        "library",
+        "playground"
+      ]
+    },
+    {
+      "start": "office",
+      "end": "teaching",
+      "distance": 180,
+      "path": [
+        "office",
+        "teaching"
+      ]
+    },
+    {
+      "start": "office",
+      "end": "library",
+      "distance": 370,
+      "path": [
+        "office",
+        "playground",
+        "library"
+      ]
+    },
+    {
+      "start": "office",
+      "end": "canteen",
+      "distance": 580,
+      "path": [
+        "office",
+        "playground",
+        "library",
+        "canteen"
+      ]
+    },
+    {
+      "start": "office",
+      "end": "dorm",
+      "distance": 170,
+      "path": [
+        "office",
+        "dorm"
+      ]
+    },
+    {
+      "start": "office",
+      "end": "gym",
+      "distance": 400,
+      "path": [
+        "office",
+        "playground",
+        "gym"
+      ]
+    },
+    {
+      "start": "office",
+      "end": "lab",
+      "distance": 680,
+      "path": [
+        "office",
+        "playground",
+        "gym",
+        "lab"
+      ]
+    },
+    {
+      "start": "office",
+      "end": "hospital",
+      "distance": 670,
+      "path": [
+        "office",
+        "playground",
+        "library",
+        "hospital"
+      ]
+    },
+    {
+      "start": "office",
+      "end": "playground",
+      "distance": 230,
+      "path": [
+        "office",
+        "playground"
+      ]
+    },
+    {
+      "start": "playground",
+      "end": "teaching",
+      "distance": 260,
+      "path": [
+        "playground",
+        "teaching"
+      ]
+    },
+    {
+      "start": "playground",
+      "end": "library",
+      "distance": 140,
+      "path": [
+        "playground",
+        "library"
+      ]
+    },
+    {
+      "start": "playground",
+      "end": "canteen",
+      "distance": 350,
+      "path": [
+        "playground",
+        "library",
+        "canteen"
+      ]
+    },
+    {
+      "start": "playground",
+      "end": "dorm",
+      "distance": 160,
+      "path": [
+        "playground",
+        "dorm"
+      ]
+    },
+    {
+      "start": "playground",
+      "end": "gym",
+      "distance": 170,
+      "path": [
+        "playground",
+        "gym"
+      ]
+    },
+    {
+      "start": "playground",
+      "end": "lab",
+      "distance": 450,
+      "path": [
+        "playground",
+        "gym",
+        "lab"
+      ]
+    },
+    {
+      "start": "playground",
+      "end": "hospital",
+      "distance": 440,
+      "path": [
+        "playground",
+        "library",
+        "hospital"
+      ]
+    },
+    {
+      "start": "playground",
+      "end": "office",
+      "distance": 230,
+      "path": [
+        "playground",
+        "office"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "teaching",
+      "target": "library",
+      "distance": 220
+    },
+    {
+      "source": "teaching",
+      "target": "office",
+      "distance": 180
+    },
+    {
+      "source": "teaching",
+      "target": "playground",
+      "distance": 260
+    },
+    {
+      "source": "library",
+      "target": "canteen",
+      "distance": 210
+    },
+    {
+      "source": "library",
+      "target": "hospital",
+      "distance": 300
+    },
+    {
+      "source": "library",
+      "target": "playground",
+      "distance": 140
+    },
+    {
+      "source": "canteen",
+      "target": "lab",
+      "distance": 240
+    },
+    {
+      "source": "canteen",
+      "target": "gym",
+      "distance": 190
+    },
+    {
+      "source": "dorm",
+      "target": "office",
+      "distance": 170
+    },
+    {
+      "source": "dorm",
+      "target": "playground",
+      "distance": 160
+    },
+    {
+      "source": "dorm",
+      "target": "gym",
+      "distance": 260
+    },
+    {
+      "source": "gym",
+      "target": "lab",
+      "distance": 280
+    },
+    {
+      "source": "gym",
+      "target": "playground",
+      "distance": 170
+    },
+    {
+      "source": "hospital",
+      "target": "lab",
+      "distance": 210
+    },
+    {
+      "source": "office",
+      "target": "playground",
+      "distance": 230
+    }
   ]
 }

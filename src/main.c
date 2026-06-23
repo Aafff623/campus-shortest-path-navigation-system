@@ -125,6 +125,24 @@ static int export_routes_json(const Graph *g, const char *path)
     }
     fprintf(fp, "  ],\n");
 
+    /* 导出无向边（只保留 from < to 的一条，避免重复） */
+    fprintf(fp, "  \"edges\": [\n");
+    int edge_first = 1;
+    for (int i = 0; i < g->edge_count; i++) {
+        if (g->edges[i].from >= g->edges[i].to) continue;
+        if (!edge_first) fputc(',', fp);
+        fputc('\n', fp);
+        edge_first = 0;
+        fprintf(fp, "    {");
+        fprint_json_string(fp, "source"); fprintf(fp, ": ");
+        fprint_json_string(fp, g->ids[g->edges[i].from]); fprintf(fp, ", ");
+        fprint_json_string(fp, "target"); fprintf(fp, ": ");
+        fprint_json_string(fp, g->ids[g->edges[i].to]); fprintf(fp, ", ");
+        fprint_json_string(fp, "distance"); fprintf(fp, ": %d}", g->edges[i].distance);
+    }
+    if (!edge_first) fputc('\n', fp);
+    fprintf(fp, "  ],\n");
+
     /* 预计算所有 (i, j) i≠j 的最短路径 */
     fprintf(fp, "  \"routes\": [\n");
     int total = 0;

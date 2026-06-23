@@ -45,6 +45,10 @@ async function loadCProgramData() {
       places = json.places;
       dataSource = 'c-program (places)';
     }
+    if (Array.isArray(json.edges) && json.edges.length > 0) {
+      edges = json.edges.map((e) => [e.source, e.target, e.distance]);
+      dataSource = 'c-program (places+edges)';
+    }
     if (Array.isArray(json.routes)) {
       routesIndex = new Map();
       json.routes.forEach((r) => {
@@ -54,7 +58,7 @@ async function loadCProgramData() {
         });
       });
       if (routesIndex.size > 0) {
-        dataSource = 'c-program (places+routes)';
+        dataSource = 'c-program (places+edges+routes)';
       }
     }
   } catch (err) {

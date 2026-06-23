@@ -123,7 +123,7 @@ bin/campus_nav.exe --export
 
 - [x] 将 7 个前端页面合并为 4 个模块并统一主题。
 - [x] 完成一次去 AI 化视觉收紧（见 `PRD-Frontend-Visual-Polish.md`）。
-- [ ] 将 `assets/prototype/js/app.js` 中的 mock 数据替换为真实后端接口。
+- [x] 将 `assets/prototype/campus-nav-prototype/js/app.js` 中的 mock 数据替换为读取 C 导出的 `data/routes.json`（places + edges + routes），保留 fallback。
 - [ ] 增加校园平面图底图。
 - [ ] 地点/路径的增删改从演示提示改为真实数据操作。
 - [ ] 补充算法复杂度分析与性能测试。
