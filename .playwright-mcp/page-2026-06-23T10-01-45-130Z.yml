@@ -1,0 +1,114 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]: ⌁
+        - generic [ref=e6]:
+          - generic [ref=e7]: 校园导航系统
+          - generic [ref=e8]: Shortest Path Navigator
+      - generic [ref=e9]: 功能菜单
+      - navigation [ref=e10]:
+        - link "⌂ 首页" [ref=e11] [cursor=pointer]:
+          - /url: index.html
+          - generic [ref=e12]: ⌂
+          - generic [ref=e13]: 首页
+        - link "⌕ 路径查询" [ref=e14] [cursor=pointer]:
+          - /url: query.html
+          - generic [ref=e15]: ⌕
+          - generic [ref=e16]: 路径查询
+        - link "⇢ 查询结果" [ref=e17] [cursor=pointer]:
+          - /url: result.html
+          - generic [ref=e18]: ⇢
+          - generic [ref=e19]: 查询结果
+        - link "▦ 地点管理" [ref=e20] [cursor=pointer]:
+          - /url: locations.html
+          - generic [ref=e21]: ▦
+          - generic [ref=e22]: 地点管理
+        - link "⛓ 路径管理" [ref=e23] [cursor=pointer]:
+          - /url: paths.html
+          - generic [ref=e24]: ⛓
+          - generic [ref=e25]: 路径管理
+        - link "ƒ 算法说明" [ref=e26] [cursor=pointer]:
+          - /url: algorithm.html
+          - generic [ref=e27]: ƒ
+          - generic [ref=e28]: 算法说明
+        - link "ⓘ 关于系统" [ref=e29] [cursor=pointer]:
+          - /url: about.html
+          - generic [ref=e30]: ⓘ
+          - generic [ref=e31]: 关于系统
+      - generic [ref=e32]:
+        - strong [ref=e33]: 课程设计原型
+        - paragraph [ref=e34]: 覆盖地点录入、路径维护、最短路径查询、异常提示与算法说明。
+    - main [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]:
+          - generic [ref=e38]: Campus Path System
+          - heading "首页 / 系统入口" [level=1] [ref=e39]
+        - generic [ref=e40]:
+          - generic "主题切换" [ref=e41]:
+            - button "蓝白" [ref=e42] [cursor=pointer]
+            - button "浅绿" [ref=e43] [cursor=pointer]
+            - button "深色" [ref=e44] [cursor=pointer]
+          - generic [ref=e45]:
+            - generic [ref=e46]: 👨‍🎓
+            - text: 课程设计用户
+      - generic [ref=e47]:
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e50]: 数据结构课程设计
+            - heading "校园最短路径导航系统" [level=1] [ref=e51]
+            - paragraph [ref=e52]: 输入校园主要地点与路径长度，使用 Dijkstra 算法查询任意两点之间的最短路径，并通过地图与文字路线输出查询结果。
+            - generic [ref=e53]:
+              - link "开始查询路径" [ref=e54] [cursor=pointer]:
+                - /url: query.html
+              - link "管理校园地点" [ref=e55] [cursor=pointer]:
+                - /url: locations.html
+              - link "查看算法说明" [ref=e56] [cursor=pointer]:
+                - /url: algorithm.html
+          - generic "校园插画" [ref=e57]:
+            - generic [ref=e63]: 起
+            - generic [ref=e65]: 终
+        - generic [ref=e93]:
+          - generic [ref=e94]:
+            - generic [ref=e95]: 📍
+            - strong [ref=e96]: "9"
+            - generic [ref=e97]: 示例校园地点，包含教学楼、食堂、宿舍、图书馆等。
+          - generic [ref=e98]:
+            - generic [ref=e99]: ⛓
+            - strong [ref=e100]: "15"
+            - generic [ref=e101]: 示例路径边，支持双向路径长度维护。
+          - generic [ref=e102]:
+            - generic [ref=e103]: ƒ
+            - strong [ref=e104]: Dijkstra
+            - generic [ref=e105]: 按图结构计算两点间最短距离与路径序列。
+        - generic [ref=e106]:
+          - generic [ref=e108]:
+            - heading "常用地点" [level=2] [ref=e109]
+            - paragraph [ref=e110]: 点击地点可快速进入路径查询页。
+          - generic [ref=e111]:
+            - link "🏫 教学楼" [ref=e112] [cursor=pointer]:
+              - /url: query.html?start=teaching
+              - generic [ref=e113]: 🏫
+              - strong [ref=e114]: 教学楼
+            - link "📚 图书馆" [ref=e115] [cursor=pointer]:
+              - /url: query.html?start=library
+              - generic [ref=e116]: 📚
+              - strong [ref=e117]: 图书馆
+            - link "🍽️ 食堂" [ref=e118] [cursor=pointer]:
+              - /url: query.html?start=canteen
+              - generic [ref=e119]: 🍽️
+              - strong [ref=e120]: 食堂
+            - link "🏠 宿舍区" [ref=e121] [cursor=pointer]:
+              - /url: query.html?start=dorm
+              - generic [ref=e122]: 🏠
+              - strong [ref=e123]: 宿舍区
+            - link "🏟️ 体育馆" [ref=e124] [cursor=pointer]:
+              - /url: query.html?start=gym
+              - generic [ref=e125]: 🏟️
+              - strong [ref=e126]: 体育馆
+            - link "🧪 实验楼" [ref=e127] [cursor=pointer]:
+              - /url: query.html?start=lab
+              - generic [ref=e128]: 🧪
+              - strong [ref=e129]: 实验楼
+        - paragraph [ref=e130]: Prototype for Campus Shortest Path Navigation System
+  - generic [ref=e131]: "data: c-program (places) · routes: 0"
