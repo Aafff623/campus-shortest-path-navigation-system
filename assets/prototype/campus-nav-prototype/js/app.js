@@ -302,10 +302,17 @@ const PLACE_ICON_PATHS = {
   playground: '<path d="M12 22c4-4 7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 3 8 7 12z"/><path d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>'
 };
 
-function placeIconMarkup(id) {
-  const paths = PLACE_ICON_PATHS[id] || PLACE_ICON_PATHS.teaching;
-  return `<svg class="map-place-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
-}
+const PLACE_COLORS = {
+  teaching: '#2563eb',
+  library: '#7c3aed',
+  canteen: '#ea580c',
+  dorm: '#059669',
+  gym: '#db2777',
+  lab: '#0891b2',
+  hospital: '#dc2626',
+  office: '#4f46e5',
+  playground: '#16a34a'
+};
 
 function renderMap(activePath = []) {
   const activePairs = new Set();
@@ -321,11 +328,17 @@ function renderMap(activePath = []) {
   }).join('');
   const nodes = places.map((p) => {
     const active = activePath.includes(p.id);
-    const radius = active ? 20 : 17;
+    const radius = active ? 22 : 19;
+    const color = PLACE_COLORS[p.id] || PLACE_COLORS.teaching;
+    const iconScale = active ? 0.92 : 0.84;
+    const iconPaths = PLACE_ICON_PATHS[p.id] || PLACE_ICON_PATHS.teaching;
     return `<g class="map-node ${active ? 'is-active' : ''}" data-place="${p.id}" transform="translate(${p.x}, ${p.y})">
-      <circle class="map-node-bg" r="${radius}" />
-      <g class="map-node-icon" transform="translate(-9, -9)">${placeIconMarkup(p.id)}</g>
-      <text class="map-node-label" text-anchor="middle" y="${radius + 15}">${p.name}</text>
+      <circle class="map-node-bg" r="${radius}" fill="#ffffff" stroke="${color}" stroke-width="${active ? 3 : 2.4}" />
+      <circle class="map-node-tint" r="${radius - 4}" fill="${color}" opacity="0.14" />
+      <g class="map-node-icon" transform="translate(-12,-12) scale(${iconScale})" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        ${iconPaths}
+      </g>
+      <text class="map-node-label" text-anchor="middle" y="${radius + 16}">${p.name}</text>
     </g>`;
   }).join('');
 
@@ -402,6 +415,152 @@ function initInlineForms() {
   });
 }
 
+/* ---- 新增地点 dialog ---- */
+function buildPlaceId(name) {
+  const trimmed = (name || '').trim();
+  if (!trimmed) return '';
+  let base = trimmed.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  if (!base) {
+    /* 全中文/纯非 ASCII：用名称的 codepoint 拼接成稳定 ID（避免同义 ID） */
+    base = 'p' + Array.from(trimmed).map((c) => c.codePointAt(0).toString(36)).join('');
+  }
+  let id = base;
+  let n = 2;
+  while (places.some((p) => p.id === id)) {
+    id = `${base}-${n++}`;
+  }
+  return id;
+}
+
+function defaultCoords() {
+  /* 没填坐标时，自动放在画布中心略偏右下，避免与已有节点重叠 */
+  if (places.length === 0) return { x: 380, y: 200 };
+  const xs = places.map((p) => p.x);
+  const ys = places.map((p) => p.y);
+  const avgX = xs.reduce((a, b) => a + b, 0) / xs.length;
+  const avgY = ys.reduce((a, b) => a + b, 0) / ys.length;
+  return {
+    x: Math.round(Math.min(740, Math.max(40, avgX + 40))),
+    y: Math.round(Math.min(370, Math.max(40, avgY + 30))),
+  };
+}
+
+function openAddPlaceDialog() {
+  const mask = document.querySelector('[data-add-place-mask]');
+  const edgesBox = document.querySelector('[data-add-place-edges]');
+  const errorBox = document.querySelector('[data-add-place-error]');
+  const form = document.querySelector('[data-add-place-form]');
+  if (!mask || !edgesBox) return;
+
+  form.reset();
+  if (errorBox) {
+    errorBox.textContent = '';
+    errorBox.classList.remove('show');
+  }
+
+  edgesBox.innerHTML = places.map((p) => `
+    <label>
+      <span>${p.name}</span>
+      <input type="number" min="1" step="1" placeholder="米" data-edge-target="${p.id}" />
+    </label>
+  `).join('');
+
+  mask.classList.add('show');
+}
+
+function closeAddPlaceDialog() {
+  const mask = document.querySelector('[data-add-place-mask]');
+  if (mask) mask.classList.remove('show');
+}
+
+function submitAddPlace() {
+  const form = document.querySelector('[data-add-place-form]');
+  const errorBox = document.querySelector('[data-add-place-error]');
+  if (!form) return;
+
+  const name = form.name.value.trim();
+  const type = form.type.value.trim();
+  const xRaw = form.x.value;
+  const yRaw = form.y.value;
+  const x = xRaw === '' ? null : Number(xRaw);
+  const y = yRaw === '' ? null : Number(yRaw);
+
+  if (!name) {
+    showError(errorBox, '请填写地点名称。');
+    return;
+  }
+  if (places.some((p) => p.name === name)) {
+    showError(errorBox, `已存在同名地点"${name}"。`);
+    return;
+  }
+  if ((x !== null && Number.isNaN(x)) || (y !== null && Number.isNaN(y))) {
+    showError(errorBox, '坐标必须是数字，或留空。');
+    return;
+  }
+
+  const id = buildPlaceId(name);
+  if (!id) {
+    showError(errorBox, '地点名称需含英文字母或数字作为 ID。');
+    return;
+  }
+  const fallback = defaultCoords();
+
+  const newEdges = [];
+  document.querySelectorAll('[data-add-place-edges] input[data-edge-target]').forEach((input) => {
+    const v = input.value.trim();
+    if (v === '') return;
+    const d = Number(v);
+    if (!Number.isFinite(d) || d <= 0) {
+      showError(errorBox, `到"${placeName(input.dataset.edgeTarget)}"的距离必须是正数，或留空。`);
+      throw new Error('bad distance');
+    }
+    newEdges.push([id, input.dataset.edgeTarget, d]);
+  });
+
+  places.push({
+    id,
+    name,
+    type: type || '其他',
+    icon: '',
+    x: x ?? fallback.x,
+    y: y ?? fallback.y,
+  });
+  newEdges.forEach((e) => edges.push(e));
+
+  initTables();
+  initMapPlaceholders();
+  initQuickPlaces();
+
+  closeAddPlaceDialog();
+}
+
+function initAddPlaceDialog() {
+  const openBtn = document.querySelector('[data-open-add-place]');
+  const mask = document.querySelector('[data-add-place-mask]');
+  if (!openBtn || !mask) return;
+
+  openBtn.addEventListener('click', openAddPlaceDialog);
+  mask.querySelectorAll('[data-add-place-close]').forEach((btn) => {
+    btn.addEventListener('click', closeAddPlaceDialog);
+  });
+  mask.addEventListener('click', (event) => {
+    if (event.target === mask) closeAddPlaceDialog();
+  });
+  const submitBtn = mask.querySelector('[data-add-place-submit]');
+  if (submitBtn) {
+    submitBtn.addEventListener('click', () => {
+      try {
+        submitAddPlace();
+      } catch (_) { /* 校验错误已显示在 dialog 中 */ }
+    });
+  }
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && mask.classList.contains('show')) {
+      closeAddPlaceDialog();
+    }
+  });
+}
+
 /* tab 切换：每个 [data-tab] 按钮只影响它所在的 card 内的 [data-panel] */
 function initTabs() {
   document.querySelectorAll('[data-tab]').forEach((btn) => {
@@ -429,6 +588,7 @@ async function initPage() {
   initQuickPlaces();
   initTables();
   initInlineForms();
+  initAddPlaceDialog();
   showDataSourceBadge();
 }
 
