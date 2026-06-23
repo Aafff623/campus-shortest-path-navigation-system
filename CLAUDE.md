@@ -29,6 +29,8 @@
 ├── assets/                 # 静态资产
 │   └── prototype/          # 前端静态原型（来自 campus-nav-prototype.zip）
 ├── docs/                   # 文档资料
+│   ├── agents/             # Matt Pocock 技能配置
+│   ├── adr/                # 架构决策记录
 │   ├── backup/             # 备份资料
 │   ├── 原始资料/           # 老师下发的任务书、原始需求
 │   ├── handoff/            # 交接与运行说明
@@ -80,3 +82,17 @@ type(scope): subject
 - 增加校园平面图底图。
 - 地点/路径的增删改从演示提示改为真实数据操作。
 - 补充算法复杂度分析与性能测试。
+
+## Agent skills
+
+### Issue tracker
+
+Issues live as local markdown files under `.scratch/<feature>/`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Canonical label vocabulary: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout: one `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
