@@ -16,7 +16,7 @@
 
 ## 仓库
 
-GitHub private repo: `https://github.com/Aafff623/campus-shortest-path-navigation-system`
+GitHub public repo: `https://github.com/Aafff623/campus-shortest-path-navigation-system`
 
 ## 快速开始
 

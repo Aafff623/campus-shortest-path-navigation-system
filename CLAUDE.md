@@ -23,7 +23,7 @@
 - 核心算法：Dijkstra（Floyd 可作为扩展）
 - 数据交换：JSON（`assets/data/routes.json`）
 - 构建工具：gcc / MinGW + Makefile
-- 版本控制：Git + GitHub private repo + Conventional Commits
+- 版本控制：Git + GitHub public repo + Conventional Commits
   - 远程仓库：`https://github.com/Aafff623/campus-shortest-path-navigation-system`
   - 详细流程见 `docs/handoff/git-workflow.md`
 
