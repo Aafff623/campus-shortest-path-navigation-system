@@ -64,11 +64,8 @@ async function loadCProgramData() {
 const navItems = [
   ['index.html', '首页', '⌂'],
   ['query.html', '路径查询', '⌕'],
-  ['result.html', '查询结果', '⇢'],
-  ['locations.html', '地点管理', '▦'],
-  ['paths.html', '路径管理', '⛓'],
-  ['algorithm.html', '算法说明', 'ƒ'],
-  ['about.html', '关于系统', 'ⓘ']
+  ['data.html', '数据管理', '▦'],
+  ['docs.html', '系统说明', 'ⓘ']
 ];
 
 function currentPage() {
@@ -204,7 +201,15 @@ function initQueryForm() {
       showError(error, '未找到可达路径，请检查地点和路径数据。');
       return;
     }
-    location.href = `result.html?start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}`;
+    if (error) {
+      error.classList.remove('show');
+      error.textContent = '';
+    }
+    const root = document.querySelector('[data-result-root]');
+    if (root) {
+      renderResultInto(root, result, start, end);
+      root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   });
 }
 
@@ -225,10 +230,51 @@ function lookupRoute(start, end) {
   };
 }
 
+/* 纯渲染函数：把 result 渲染到任意 root 容器内。同页 / result.html 都复用。 */
+function renderResultInto(root, result, start, end) {
+  const pathPairs = result.path.slice(0, -1).map((id, index) => [id, result.path[index + 1]]);
+  root.innerHTML = `
+    <section class="card pad">
+      <div class="section-head">
+        <div>
+          <h2>最短路径结果</h2>
+          <p>从 <strong>${placeName(start)}</strong> 到 <strong>${placeName(end)}</strong> 的推荐路线。</p>
+        </div>
+        <span class="badge success">Dijkstra 已计算</span>
+      </div>
+      <div class="distance-card">
+        <small>最短距离</small>
+        <div><span class="distance-number">${result.distance}</span> 米</div>
+      </div>
+      <div>
+        <div class="section-note">路径文字输出</div>
+        <div class="path-text">${result.names.join(' → ')}</div>
+      </div>
+      <div class="path-list" style="margin-top:14px">
+        ${result.path.map((id) => `<div class="path-step"><span>${placeName(id)}</span></div>`).join('')}
+      </div>
+      <div class="route-chip-row" style="margin-top:14px">
+        ${pathPairs.map(([a, b]) => `<span class="route-chip">${placeName(a)} → ${placeName(b)} · ${edgeDistance(a, b)}m</span>`).join('')}
+      </div>
+      <div class="form-actions" style="justify-content:flex-start">
+        <button class="btn ghost" onclick="window.print()">打印结果</button>
+      </div>
+    </section>
+    <div class="card map-card" style="margin-top:10px">
+      ${renderMap(result.path)}
+    </div>
+  `;
+}
+
+/* 兼容老 result.html 的兜底（当前项目已删除 result.html，留作 fallback）。
+   query.html 上的 [data-result-root] 不在此处处理，由 initQueryForm 表单提交后填充。 */
 function initResultPage() {
   const root = document.querySelector('[data-result-root]');
   if (!root) return;
+  /* 仅当路径名是 result.html 或 URL 显式带 start/end 参数时才渲染 */
+  const page = location.pathname.split('/').pop();
   const params = new URLSearchParams(location.search);
+  if (page !== 'result.html' && !params.get('start')) return;
   const start = params.get('start') || 'teaching';
   const end = params.get('end') || 'library';
   const result = lookupRoute(start, end) || dijkstra(start, end);
@@ -236,49 +282,7 @@ function initResultPage() {
     root.innerHTML = `<div class="empty-state card"><div class="big-icon">⚠</div><h2>没有找到路径</h2><p>请返回路径查询页，重新选择合法的起点和终点。</p><a class="btn primary" href="query.html">重新查询</a></div>`;
     return;
   }
-  const pathPairs = result.path.slice(0, -1).map((id, index) => [id, result.path[index + 1]]);
-  root.innerHTML = `
-    <section class="grid two">
-      <div class="card pad route-summary">
-        <div class="section-head">
-          <div>
-            <h2>最短路径结果</h2>
-            <p>从 <strong>${placeName(start)}</strong> 到 <strong>${placeName(end)}</strong> 的推荐路线。</p>
-          </div>
-          <span class="badge success">Dijkstra 已计算</span>
-        </div>
-        <div class="distance-card">
-          <small>最短距离</small>
-          <div><span class="distance-number">${result.distance}</span> 米</div>
-        </div>
-        <div>
-          <div class="section-note">路径文字输出</div>
-          <div class="path-text">${result.names.join(' → ')}</div>
-        </div>
-        <div class="path-list">
-          ${result.path.map((id) => `<div class="path-step"><span>${placeIcon(id)} ${placeName(id)}</span></div>`).join('')}
-        </div>
-        <div class="form-actions" style="justify-content:flex-start">
-          <a class="btn secondary" href="query.html">重新查询</a>
-          <button class="btn ghost" onclick="window.print()">打印结果</button>
-        </div>
-      </div>
-      <div class="card map-card">
-        ${renderMap(result.path)}
-      </div>
-    </section>
-    <section class="card pad" style="margin-top:20px">
-      <div class="section-head">
-        <div>
-          <h2>分段距离</h2>
-          <p>用于课程设计说明书中的路径输出与测试截图。</p>
-        </div>
-      </div>
-      <div class="route-chip-row">
-        ${pathPairs.map(([a, b]) => `<span class="route-chip">${placeName(a)} → ${placeName(b)} · ${edgeDistance(a, b)}m</span>`).join('')}
-      </div>
-    </section>
-  `;
+  renderResultInto(root, result, start, end);
 }
 
 function edgeDistance(a, b) {
@@ -302,8 +306,8 @@ function renderMap(activePath = []) {
     const active = activePath.includes(p.id);
     return `<g class="map-node" transform="translate(${p.x}, ${p.y})">
       <circle r="${active ? 19 : 15}" />
+      <text text-anchor="middle" y="5" font-size="14" font-weight="800">${p.name.slice(0, 2)}</text>
       <text text-anchor="middle" y="39">${p.name}</text>
-      <text text-anchor="middle" y="5" font-size="16">${p.icon}</text>
     </g>`;
   }).join('');
 
@@ -334,7 +338,6 @@ function initQuickPlaces() {
   document.querySelectorAll('[data-place-grid]').forEach((grid) => {
     grid.innerHTML = places.slice(0, 6).map((p) => `
       <a class="place-tile" href="query.html?start=${p.id}">
-        <div class="place-icon">${p.icon}</div>
         <strong>${p.name}</strong>
       </a>
     `).join('');
@@ -347,10 +350,9 @@ function initTables() {
     locationBody.innerHTML = places.map((p, index) => `
       <tr>
         <td>${index + 1}</td>
-        <td><strong>${p.icon} ${p.name}</strong></td>
+        <td><strong>${p.name}</strong></td>
         <td><span class="badge">${p.type}</span></td>
         <td>${Math.round(p.x)}, ${Math.round(p.y)}</td>
-        <td><button class="action-link">编辑</button><button class="action-link" style="color:var(--danger)">删除</button></td>
       </tr>
     `).join('');
   }
@@ -364,7 +366,6 @@ function initTables() {
         <td>${placeName(b)}</td>
         <td><strong>${distance} 米</strong></td>
         <td><span class="badge success">双向可达</span></td>
-        <td><button class="action-link">编辑</button><button class="action-link" style="color:var(--danger)">删除</button></td>
       </tr>
     `).join('');
   }
@@ -383,10 +384,27 @@ function initInlineForms() {
   });
 }
 
+/* tab 切换：每个 [data-tab] 按钮只影响它所在的 card 内的 [data-panel] */
+function initTabs() {
+  document.querySelectorAll('[data-tab]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const group = btn.closest('.card') || document;
+      const key = btn.dataset.tab;
+      group.querySelectorAll('[data-tab]').forEach((b) => {
+        b.classList.toggle('active', b === btn);
+      });
+      group.querySelectorAll('[data-panel]').forEach((p) => {
+        p.classList.toggle('active', p.dataset.panel === key);
+      });
+    });
+  });
+}
+
 async function initPage() {
   initLayout();
   await loadCProgramData();   /* 异步加载 C 端 JSON */
   initSelects();
+  initTabs();
   initQueryForm();
   initResultPage();
   initMapPlaceholders();

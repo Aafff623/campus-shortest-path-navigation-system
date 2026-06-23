@@ -15,6 +15,9 @@ Thumbs.db
 .playwright-mcp/
 *.actual.png
 *actual.png
+*after-merge.png
+*after-polish.png
+*current.png
 
 # Local http server data mirror (the source of truth is assets/data/routes.json)
 assets/prototype/campus-nav-prototype/data/
