@@ -1,6 +1,6 @@
 # dijkstra-algorithm
 
-**标签**: `ready-for-agent`  
+**标签**: `ready-for-review`  
 **依赖**: graph-data-structure
 
 ## 目标

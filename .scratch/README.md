@@ -7,8 +7,8 @@
 | 编号 | 任务 | 状态 | 依赖 |
 |------|------|------|------|
 | 1 | [setup-c-project](./setup-c-project/) | `completed` | - |
-| 2 | [graph-data-structure](./graph-data-structure/) | `ready-for-review` | #1 |
-| 3 | [dijkstra-algorithm](./dijkstra-algorithm/) | `ready-for-agent` | #2 |
+| 2 | [graph-data-structure](./graph-data-structure/) | `completed` | #1 |
+| 3 | [dijkstra-algorithm](./dijkstra-algorithm/) | `ready-for-review` | #2 |
 | 4 | [export-json](./export-json/) | `ready-for-agent` | #3 |
 | 5 | [cli-menu-query](./cli-menu-query/) | `ready-for-agent` | #2 |
 | 6 | [input-validation](./input-validation/) | `ready-for-agent` | #5 |
