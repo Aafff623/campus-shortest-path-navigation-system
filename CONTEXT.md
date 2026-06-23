@@ -18,18 +18,21 @@
 - 查询任意两点间最短路径及距离。
 - 文字形式输出路径。
 - 处理异常输入。
+- 亮/暗主题切换与基础数据管理界面。
 
 ## Out of scope
 
 - 真实地理坐标与 GIS 集成。
 - 实时导航与语音播报。
 - 多用户权限系统。
+- 后端服务与持久化数据库。
 
 ## Architecture notes
 
-- 前端：纯静态 HTML/CSS/JS 原型。
-- 算法：C / Java / Python 任选其一实现。
-- 数据：地点与路径数据最终由算法层管理。
+- 前端：纯静态 HTML/CSS/JS 原型，4 个页面（index / query / data / docs），读取 `assets/data/routes.json`。
+- 算法：C99 实现 Dijkstra，通过 `bin/campus_nav --export` 导出 `routes.json`；前端同时保留一份 JS 实现用于演示。
+- 数据：地点与路径数据由 C 程序生成，前端仅做展示与交互。
+- 视觉：近期完成一次去 AI 化视觉收紧，见 `docs/handoff/frontend-visual-polish-progress-handoff.md`。
 
 ## Decisions
 

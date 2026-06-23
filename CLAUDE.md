@@ -33,7 +33,8 @@
 .
 ├── assets/                 # 静态资产
 │   ├── data/               # C 程序导出的 routes.json
-│   └── prototype/          # 前端静态原型（来自 campus-nav-prototype.zip）
+│   └── prototype/          # 前端静态原型（4 页：index/query/data/docs）
+│       └── campus-nav-prototype/
 ├── bin/                    # 编译产物
 ├── docs/                   # 文档资料
 │   ├── agents/             # Matt Pocock 技能配置
@@ -42,12 +43,16 @@
 │   ├── 原始资料/           # 老师下发的任务书、原始需求
 │   ├── handoff/            # 交接与运行说明
 │   └── reports/            # 课程设计说明书、测试报告、截图
+├── include/                # C 头文件
 ├── src/                    # C 源码
+│   ├── dijkstra.c          # Dijkstra 算法实现
+│   └── main.c              # 主程序与 JSON 导出
 ├── tests/                  # 测试用例
 ├── Makefile                # 构建脚本
 ├── requirements.md         # 整理后的需求文档
 ├── requirements.txt        # 任务书文本副本
 ├── PRD-校园最短路径导航系统.md  # 产品需求文档
+├── PRD-Frontend-Visual-Polish.md  # 前端视觉升级 PRD
 ├── CONTEXT.md              # 领域上下文
 ├── CLAUDE.md               # 本文件
 └── README.md               # 项目总览
@@ -58,7 +63,8 @@
 - **最小够用**：只实现任务书要求的功能，不预加未要求的能力。
 - **算法可验证**：核心 Dijkstra / Floyd 实现需配测试用例，覆盖正常路径、不可达、异常输入。
 - **数据与界面分离**：地点、路径、算法逻辑应独立，便于后续替换为后端实现。
-- **保持原型一致**：前端页面结构、主题、地图渲染尽量与 `assets/prototype/` 保持一致。
+- **保持原型一致**：前端页面结构、主题、地图渲染尽量与 `assets/prototype/` 保持一致；视觉调整遵循 `PRD-Frontend-Visual-Polish.md`，避免 AI 模板感。
+- **文档随代码更新**：修改结构或新增 PRD/handoff 后，同步更新 `README.md`、`CONTEXT.md` 与 `CLAUDE.md`。
 
 ## 提交规范
 
@@ -91,16 +97,44 @@ type(scope): subject
 
 详见 `docs/handoff/git-workflow.md`。
 
-## 运行方式（待补充）
+## 运行方式
 
-待源码目录确定后，在 `docs/handoff/运行说明.md` 中补充编译、运行、测试命令。
+### 前端原型
+
+```bash
+cd assets/prototype/campus-nav-prototype
+python -m http.server 8081
+```
+
+浏览器访问 `http://localhost:8081/index.html`。
+
+### C 后端编译与导出数据
+
+```bash
+make
+bin/campus_nav.exe --export
+```
+
+导出结果写入 `assets/data/routes.json`。
+
+详见 `docs/handoff/运行说明.md`。
 
 ## 后续可改进点
 
-- 将 `assets/prototype/js/app.js` 中的 mock 数据替换为真实后端接口。
-- 增加校园平面图底图。
-- 地点/路径的增删改从演示提示改为真实数据操作。
-- 补充算法复杂度分析与性能测试。
+- [x] 将 7 个前端页面合并为 4 个模块并统一主题。
+- [x] 完成一次去 AI 化视觉收紧（见 `PRD-Frontend-Visual-Polish.md`）。
+- [ ] 将 `assets/prototype/js/app.js` 中的 mock 数据替换为真实后端接口。
+- [ ] 增加校园平面图底图。
+- [ ] 地点/路径的增删改从演示提示改为真实数据操作。
+- [ ] 补充算法复杂度分析与性能测试。
+- [ ] 优化 `data.html` / `docs.html` 的垂直空间，减少滚动。
+
+## 相关 PRD / Handoff
+
+- `PRD-Frontend-Visual-Polish.md`
+- `docs/handoff/frontend-visual-polish.md`
+- `docs/handoff/frontend-visual-polish-progress-handoff.md`
+- `docs/reports/frontend-polish-investigation.md`
 
 ## Agent skills
 

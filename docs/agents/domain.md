@@ -10,6 +10,7 @@ This repo uses a **single-context** layout.
 
 - `docs/adr/` contains architecture decision records.
 - Name them `YYYYMMDD-title.md`.
+- Recent example: `docs/adr/20260623-frontend-visual-polish.md` documents the AI-feel reduction and layout tightening decisions.
 
 ## Consumer rules
 

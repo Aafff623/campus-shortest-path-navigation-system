@@ -21,30 +21,50 @@ GitHub private repo: `https://github.com/Aafff623/campus-shortest-path-navigatio
 ## 快速开始
 
 1. 查看整理后的需求：`requirements.md`
-2. 查看前端原型：`assets/prototype/index.html`（可直接用浏览器打开）
+2. 查看前端原型：`assets/prototype/campus-nav-prototype/index.html`（可直接用浏览器打开，或启动 `python -m http.server`）
 3. 查看任务书原件：`docs/原始资料/课程设计任务书.doc`
-4. 查看 PRD：`PRD-校园最短路径导航系统.md`
+4. 查看 PRD：
+   - `PRD-校园最短路径导航系统.md`
+   - `PRD-Frontend-Visual-Polish.md`（前端视觉去 AI 化升级）
 5. 查看任务清单：`.scratch/README.md`
+6. 查看运行说明：`docs/handoff/运行说明.md`
 
 ## 目录结构
 
 ```
-├── assets/prototype/   # 前端静态原型
-├── docs/               # 文档与资料
-│   ├── backup/         # 备份
-│   ├── 原始资料/       # 任务书等原始文件
-│   ├── handoff/        # 交接说明
-│   └── reports/        # 课程设计说明书
-├── src/                # 后端/算法源码（待创建）
-├── tests/              # 测试用例（待创建）
-├── CLAUDE.md           # 项目规范
-└── README.md           # 本文件
+├── assets/                 # 静态资产
+│   ├── data/               # C 程序导出的 routes.json
+│   └── prototype/          # 前端静态原型
+│       └── campus-nav-prototype/  # 4 页 HTML/CSS/JS 原型
+├── bin/                    # 编译产物
+├── docs/                   # 文档资料
+│   ├── agents/             # Matt Pocock 技能配置
+│   ├── adr/                # 架构决策记录
+│   ├── backup/             # 备份资料
+│   ├── handoff/            # 交接与运行说明
+│   ├── reports/            # 课程设计说明书、测试报告、截图
+│   └── 原始资料/           # 老师下发的任务书、原始需求
+├── src/                    # C 源码
+│   ├── dijkstra.c          # Dijkstra 算法实现
+│   └── main.c              # 主程序与 JSON 导出
+├── include/                # C 头文件
+├── tests/                  # 测试用例
+├── Makefile                # 构建脚本
+├── requirements.md         # 整理后的需求文档
+├── requirements.txt        # 任务书文本副本
+├── PRD-校园最短路径导航系统.md  # 产品需求文档
+├── PRD-Frontend-Visual-Polish.md  # 前端视觉升级 PRD
+├── CONTEXT.md              # 领域上下文
+├── CLAUDE.md               # 项目规范
+└── README.md               # 本文件
 ```
 
 ## 技术栈
 
-- 前端：HTML / CSS / JavaScript（纯静态）
-- 算法：C / Java / Python（按课程要求选择）
+- 前端：HTML / CSS / JavaScript（纯静态，4 页面：首页、路径查询、数据管理、系统说明）
+- 算法后端：C（C99 标准），Dijkstra 最短路径
+- 数据交换：JSON（`assets/data/routes.json`）
+- 构建工具：gcc / MinGW + Makefile
 
 ## 开发规范
 
@@ -52,5 +72,6 @@ GitHub private repo: `https://github.com/Aafff623/campus-shortest-path-navigatio
 
 ## 交付物
 
-- 可运行程序 + 源码
+- 可运行程序 + 源码（C + 静态前端）
 - 课程设计说明书（放入 `docs/reports/`）
+- 前端升级 PRD 与 handoff（`PRD-Frontend-Visual-Polish.md`、`docs/handoff/frontend-visual-polish-progress-handoff.md`）
