@@ -1,6 +1,6 @@
 # graph-data-structure
 
-**标签**: `ready-for-review`  
+**标签**: `completed`  
 **依赖**: setup-c-project
 
 ## 目标

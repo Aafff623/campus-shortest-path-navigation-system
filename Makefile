@@ -2,7 +2,7 @@
 
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c99 -Iinclude
-SRCS = src/main.c src/graph.c
+SRCS = src/main.c src/graph.c src/dijkstra.c
 TARGET = bin/campus_nav
 
 # Windows 与 POSIX 兼容
@@ -10,7 +10,7 @@ ifeq ($(OS),Windows_NT)
 	TARGET := $(TARGET).exe
 endif
 
-.PHONY: build run export clean
+.PHONY: build run export clean clean-data
 
 build: $(TARGET)
 
@@ -26,7 +26,6 @@ export: build
 
 clean:
 	rm -f $(TARGET)
-	rm -f $(EXPORT_PATH)
 
 clean-data:
 	rm -f assets/data/routes.json

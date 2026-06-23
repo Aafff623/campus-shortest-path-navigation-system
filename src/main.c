@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include "graph.h"
+#include "dijkstra.h"
 
-#define VERSION "0.2.0"
+#define VERSION "0.3.0"
 #define EXPORT_PATH "assets/data/routes.json"
 
 static void print_welcome(void)
@@ -20,14 +21,66 @@ static void print_menu(void)
     printf("功能菜单：\n");
     printf("  1. 查看校园地点列表\n");
     printf("  2. 查看所有路径\n");
-    printf("  3. 查询两点间最短路径（占位，下一任务实现）\n");
+    printf("  3. 查询两点间最短路径\n");
     printf("  0. 退出系统\n");
     printf("\n");
-    printf("提示：使用 --export 参数可导出 routes.json（当前为含地点信息的占位）。\n");
+    printf("提示：使用 --export 参数可导出 routes.json。\n");
     printf("\n");
 }
 
-/* 导出 routes.json（占位版：包含 places 数组，routes 为空） */
+static void print_route(const Graph *g, const DijkstraResult *r)
+{
+    if (r->distance == DIJKSTRA_UNREACH || r->path_len == 0) {
+        printf("结果：没有可达路径。\n");
+        return;
+    }
+    printf("路径：");
+    for (int i = 0; i < r->path_len; i++) {
+        printf("%s", graph_place_name(g, r->path[i]));
+        if (i < r->path_len - 1) printf(" → ");
+    }
+    printf("\n");
+    printf("最短距离：%d 米\n", r->distance);
+}
+
+static int do_query(Graph *g)
+{
+    int start, end;
+    char line[64];
+
+    graph_print_places(g);
+    printf("\n请输入起点编号：");
+    if (!fgets(line, sizeof(line), stdin)) return 0;
+    if (sscanf(line, "%d", &start) != 1) {
+        printf("输入无效。\n");
+        return 1;
+    }
+    if (!graph_valid_place(g, start)) {
+        printf("起点编号 %d 不存在。\n", start);
+        return 1;
+    }
+
+    printf("请输入终点编号：");
+    if (!fgets(line, sizeof(line), stdin)) return 0;
+    if (sscanf(line, "%d", &end) != 1) {
+        printf("输入无效。\n");
+        return 1;
+    }
+    if (!graph_valid_place(g, end)) {
+        printf("终点编号 %d 不存在。\n", end);
+        return 1;
+    }
+
+    if (start == end) {
+        printf("起点和终点不能相同。\n");
+        return 1;
+    }
+
+    DijkstraResult r = dijkstra_shortest_path(g, start, end);
+    print_route(g, &r);
+    return 1;
+}
+
 static int export_routes_json(const Graph *g, const char *path)
 {
     FILE *fp = fopen(path, "w");
@@ -51,6 +104,15 @@ static int export_routes_json(const Graph *g, const char *path)
     fclose(fp);
     printf("已导出 %d 个地点到 %s\n", PLACE_COUNT, path);
     return 0;
+}
+
+static int read_choice(void)
+{
+    char line[16];
+    if (!fgets(line, sizeof(line), stdin)) return -1;
+    int n;
+    if (sscanf(line, "%d", &n) != 1) return -1;
+    return n;
 }
 
 int main(int argc, char *argv[])
@@ -79,12 +141,33 @@ int main(int argc, char *argv[])
 
     print_welcome();
     print_menu();
-
     printf("已加载 %d 个地点、%d 条有向路径记录。\n\n", PLACE_COUNT, g.edge_count);
 
-    /* 临时演示：直接打印地点和边 */
-    graph_print_places(&g);
-    graph_print_edges(&g);
+    int running = 1;
+    while (running) {
+        printf("请选择功能：");
+        int choice = read_choice();
+        switch (choice) {
+        case 1:
+            graph_print_places(&g);
+            printf("\n");
+            break;
+        case 2:
+            graph_print_edges(&g);
+            printf("\n");
+            break;
+        case 3:
+            do_query(&g);
+            printf("\n");
+            break;
+        case 0:
+            running = 0;
+            break;
+        default:
+            printf("无效选择。\n\n");
+        }
+    }
 
+    printf("已退出。\n");
     return 0;
 }
