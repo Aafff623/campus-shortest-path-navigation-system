@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+#include "graph.h"
 
-#define VERSION "0.1.0"
+#define VERSION "0.2.0"
 #define EXPORT_PATH "assets/data/routes.json"
 
 static void print_welcome(void)
@@ -18,14 +19,16 @@ static void print_menu(void)
 {
     printf("功能菜单：\n");
     printf("  1. 查看校园地点列表\n");
-    printf("  2. 查询两点间最短路径\n");
+    printf("  2. 查看所有路径\n");
+    printf("  3. 查询两点间最短路径（占位，下一任务实现）\n");
     printf("  0. 退出系统\n");
     printf("\n");
-    printf("提示：使用 --export 参数可导出前端所需的 routes.json。\n");
+    printf("提示：使用 --export 参数可导出 routes.json（当前为含地点信息的占位）。\n");
     printf("\n");
 }
 
-static int export_routes_json_stub(const char *path)
+/* 导出 routes.json（占位版：包含 places 数组，routes 为空） */
+static int export_routes_json(const Graph *g, const char *path)
 {
     FILE *fp = fopen(path, "w");
     if (fp == NULL) {
@@ -34,19 +37,28 @@ static int export_routes_json_stub(const char *path)
     }
 
     fprintf(fp, "{\n");
-    fprintf(fp, "  \"places\": [],\n");
+    fprintf(fp, "  \"places\": [\n");
+    for (int i = 0; i < PLACE_COUNT; i++) {
+        fprintf(fp,
+                "    {\"id\": %d, \"name\": \"%s\", \"type\": \"%s\", \"x\": %d, \"y\": %d}%s\n",
+                i, g->names[i], g->types[i], g->coord_x[i], g->coord_y[i],
+                (i == PLACE_COUNT - 1) ? "" : ",");
+    }
+    fprintf(fp, "  ],\n");
     fprintf(fp, "  \"routes\": []\n");
     fprintf(fp, "}\n");
 
     fclose(fp);
-    printf("已导出占位数据到 %s\n", path);
+    printf("已导出 %d 个地点到 %s\n", PLACE_COUNT, path);
     return 0;
 }
 
 int main(int argc, char *argv[])
 {
-    int export_mode = 0;
+    Graph g;
+    graph_init(&g);
 
+    int export_mode = 0;
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--export") == 0) {
             export_mode = 1;
@@ -62,13 +74,17 @@ int main(int argc, char *argv[])
     }
 
     if (export_mode) {
-        return export_routes_json_stub(EXPORT_PATH);
+        return export_routes_json(&g, EXPORT_PATH);
     }
 
     print_welcome();
     print_menu();
 
-    printf("（当前为占位菜单，具体交互在后续任务中实现。）\n\n");
+    printf("已加载 %d 个地点、%d 条有向路径记录。\n\n", PLACE_COUNT, g.edge_count);
+
+    /* 临时演示：直接打印地点和边 */
+    graph_print_places(&g);
+    graph_print_edges(&g);
 
     return 0;
 }
