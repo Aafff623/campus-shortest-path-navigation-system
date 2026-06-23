@@ -21,7 +21,7 @@
         <button class="btn ghost mobile-menu-btn" data-menu-toggle>☰</button>
         <div><div class="page-kicker">Data</div><h1 class="page-title">数据管理</h1></div>
         <div class="top-actions">
-          <div class="theme-switch"><button class="theme-btn" data-theme-btn="blue">蓝白</button><button class="theme-btn" data-theme-btn="dark">深色</button></div>
+          <div class="theme-switch"><button class="theme-btn" data-theme-btn="blue">亮色</button><button class="theme-btn" data-theme-btn="dark">深色</button></div>
           <div class="user-pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg> 图数据</div>
         </div>
       </header>
@@ -39,6 +39,7 @@
                 <h2>校园地点</h2>
                 <p>图结构中的 9 个顶点。</p>
               </div>
+              <button class="btn primary" data-open-add-place>新增地点</button>
             </div>
             <div class="table-wrap">
               <table>
@@ -77,6 +78,47 @@
       </section>
     </main>
   </div>
+
+  <!-- 新增地点 dialog -->
+  <div class="dialog-mask" data-add-place-mask>
+    <div class="dialog" role="dialog" aria-labelledby="add-place-title">
+      <div class="dialog-head">
+        <h2 id="add-place-title">新增校园地点</h2>
+        <button class="dialog-close" data-add-place-close aria-label="关闭">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <form class="form" data-add-place-form>
+          <div class="form-row">
+            <label for="add-place-name">地点名称</label>
+            <div class="input-wrap"><input id="add-place-name" name="name" placeholder="如：图书馆分馆" autocomplete="off" /></div>
+          </div>
+          <div class="form-row">
+            <label for="add-place-type">地点类型</label>
+            <div class="input-wrap"><input id="add-place-type" name="type" placeholder="如：公共服务" autocomplete="off" /></div>
+          </div>
+          <div class="form-row">
+            <label>地图坐标（可选，自动估算）</label>
+            <div class="grid two-fields">
+              <div class="input-wrap"><span class="input-icon">X</span><input id="add-place-x" name="x" type="number" min="0" max="760" placeholder="X" /></div>
+              <div class="input-wrap"><span class="input-icon">Y</span><input id="add-place-y" name="y" type="number" min="0" max="390" placeholder="Y" /></div>
+            </div>
+          </div>
+
+          <div class="dialog-edges-title">与其他地点的距离（米，留空表示不连边）</div>
+          <div class="dialog-edges" data-add-place-edges></div>
+
+          <div class="dialog-error" data-add-place-error></div>
+        </form>
+      </div>
+      <div class="dialog-foot">
+        <button class="btn ghost" type="button" data-add-place-close>取消</button>
+        <button class="btn primary" type="button" data-add-place-submit>添加地点</button>
+      </div>
+    </div>
+  </div>
+
   <script src="js/app.js"></script>
 </body>
 </html>
