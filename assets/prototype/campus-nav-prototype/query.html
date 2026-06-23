@@ -13,13 +13,13 @@
       <div class="brand"><div class="logo" aria-label="校园导航 Logo"><svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5" fill="currentColor"/><line x1="12" y1="9.5" x2="6" y2="4"/><line x1="12" y1="9.5" x2="18" y2="4"/><line x1="12" y1="14.5" x2="6" y2="20"/><line x1="12" y1="14.5" x2="18" y2="20"/><circle cx="6" cy="4" r="1.4" fill="currentColor"/><circle cx="18" cy="4" r="1.4" fill="currentColor"/><circle cx="6" cy="20" r="1.4" fill="currentColor"/><circle cx="18" cy="20" r="1.4" fill="currentColor"/></svg></div><div><div class="brand-title">校园导航系统</div><div class="brand-subtitle">Shortest Path Navigator</div></div></div>
       <div class="nav-section-title">功能菜单</div>
       <nav class="nav-list" data-nav></nav>
-      <div class="sidebar-card"><strong>查询提示</strong><p>选择起终点后点击查询，结果会直接出现在本页下方。</p></div>
+      <div class="sidebar-card" style="padding:10px 12px"><p style="font-size:12px;color:var(--muted);margin:0">选择起终点后点击查询，结果会展示在下方。</p></div>
     </aside>
 
     <main class="main">
       <header class="topbar">
         <button class="btn ghost mobile-menu-btn" data-menu-toggle>☰</button>
-        <div><div class="page-kicker">Path Query</div><h1 class="page-title">路径查询</h1></div>
+        <div><div class="page-kicker">路径查询</div><h1 class="page-title">路径查询</h1></div>
         <div class="top-actions">
           <div class="theme-switch"><button class="theme-btn" data-theme-btn="blue">亮色</button><button class="theme-btn" data-theme-btn="dark">深色</button></div>
           <div class="user-pill"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5" fill="currentColor"/><line x1="12" y1="9.5" x2="6" y2="4"/><line x1="12" y1="9.5" x2="18" y2="4"/><line x1="12" y1="14.5" x2="6" y2="20"/><line x1="12" y1="14.5" x2="18" y2="20"/><circle cx="6" cy="4" r="1.4" fill="currentColor"/><circle cx="18" cy="4" r="1.4" fill="currentColor"/><circle cx="6" cy="20" r="1.4" fill="currentColor"/><circle cx="18" cy="20" r="1.4" fill="currentColor"/></svg> 导航查询</div>
@@ -68,29 +68,11 @@
         </section>
 
         <!-- section 2: 异常说明 -->
-        <section class="card pad query-section">
-          <div class="section-head">
-            <div>
-              <h2>异常输入处理</h2>
-              <p>未选择 / 相同地点 / 不可达 都会给出提示。</p>
-            </div>
-          </div>
-          <div class="grid three">
-            <div class="stat-card card">
-              <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.7 3.86a2 2 0 0 0-3.4 0z"/></svg></div>
-              <strong>未选择</strong>
-              <span>提示补全起点或终点。</span>
-            </div>
-            <div class="stat-card card">
-              <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 5l-7 7 7 7"/></svg></div>
-              <strong>相同地点</strong>
-              <span>起终点相同时阻止查询。</span>
-            </div>
-            <div class="stat-card card">
-              <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg></div>
-              <strong>不可达</strong>
-              <span>图中不存在路径时提示。</span>
-            </div>
+        <section class="card pad query-section" style="padding:14px 18px">
+          <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+            <span style="font-size:13px;font-weight:600;color:var(--muted)">异常处理：</span>
+            <span style="font-size:12px;color:var(--text)">未选择地点 · 起终点相同 · 路径不可达</span>
+            <span style="font-size:12px;color:var(--muted)">均会给出明确提示</span>
           </div>
         </section>
 

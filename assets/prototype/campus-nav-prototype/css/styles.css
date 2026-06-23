@@ -13,6 +13,7 @@
   --warning: #f59e0b;
   --success: #16a34a;
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.02);
   --radius: 6px;
   --radius-lg: 12px;
   --sidebar: #ffffff;
@@ -39,6 +40,7 @@
   --warning: #fbbf24;
   --success: #34d399;
   --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
   --sidebar: #161618;
   --map-bg: #17171c;
   --map-road: #393946;
@@ -46,6 +48,15 @@
   --code-bg: #07111f;
   --code-fg: #dbeafe;
   --code-keyword: #a5b4fc;
+}
+
+.bg-dots {
+  background-image: radial-gradient(circle at 0.5px 0.5px, rgba(0, 0, 0, 0.08) 0.5px, transparent 0);
+  background-size: 8px 8px;
+}
+
+[data-theme="dark"] .bg-dots {
+  background-image: radial-gradient(circle at 0.5px 0.5px, rgba(255, 255, 255, 0.06) 0.5px, transparent 0);
 }
 
 * {
@@ -239,9 +250,7 @@ button {
 .page-kicker {
   color: var(--primary);
   font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .page-title {
@@ -330,6 +339,7 @@ button {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }
 
 .card.pad {
@@ -339,23 +349,12 @@ button {
 .hero {
   position: relative;
   overflow: hidden;
-  min-height: 200px;
+  min-height: 160px;
   display: grid;
-  grid-template-columns: 1fr 360px;
+  grid-template-columns: 1fr 280px;
   align-items: center;
-  gap: 20px;
-  padding: 16px 18px;
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: auto -80px -120px auto;
-  width: 420px;
-  height: 420px;
-  border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--primary) 22%, transparent), transparent 68%);
-  pointer-events: none;
+  gap: 16px;
+  padding: 14px 16px;
 }
 
 .hero h1 {
@@ -421,52 +420,52 @@ button {
 
 .hero-visual {
   position: relative;
-  min-height: 240px;
-  border-radius: 12px;
+  min-height: 180px;
+  border-radius: var(--radius-lg);
   background: var(--map-bg);
   border: 1px solid var(--line);
   overflow: hidden;
 }
 
 .hero-visual .campus-map {
-  min-height: 240px;
+  min-height: 180px;
 }
 
 .stat-card {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto 1fr;
   grid-template-areas:
-    "label icon"
-    "num   icon"
-    "sub   sub";
-  align-items: start;
-  gap: 6px 12px;
-  padding: 20px;
+    "icon label"
+    "icon num"
+    "sub  sub";
+  align-items: center;
+  gap: 4px 12px;
+  padding: 14px;
 }
 
 .stat-card .icon {
   grid-area: icon;
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   display: grid;
   place-items: center;
-  border-radius: var(--radius-lg);
+  border-radius: 8px;
   background: var(--primary-soft);
   color: var(--primary);
 }
 
 .stat-card .label {
   grid-area: label;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--muted);
   font-weight: 500;
 }
 
 .stat-card strong {
   grid-area: num;
-  font-size: 30px;
-  font-weight: 800;
-  line-height: 1.1;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
   color: var(--text);
   letter-spacing: -0.02em;
 }
@@ -477,7 +476,7 @@ button {
   color: var(--muted);
   display: flex;
   gap: 12px;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .stat-card span {
@@ -566,9 +565,8 @@ button {
   gap: 12px;
   padding: 12px 14px;
   border: 1px solid var(--line);
-  border-radius: 14px;
-  background: linear-gradient(180deg, var(--surface-strong), var(--surface));
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+  border-radius: 10px;
+  background: var(--surface-soft);
 }
 
 .route-rail {
@@ -639,8 +637,7 @@ button {
 .query-form-actions .btn.primary {
   min-width: 132px;
   padding: 8px 18px;
-  border-radius: 10px;
-  box-shadow: 0 8px 18px color-mix(in srgb, var(--primary) 28%, transparent);
+  border-radius: 8px;
 }
 
 .form-row {
@@ -657,11 +654,11 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 0 14px;
-  min-height: 56px;
+  padding: 0 12px;
+  min-height: 44px;
   border: 1px solid var(--line);
   background: var(--surface-strong);
-  border-radius: 16px;
+  border-radius: 10px;
 }
 
 .input-wrap-compact {
@@ -720,9 +717,9 @@ select option {
 }
 
 .distance-number {
-  font-size: 50px;
-  font-weight: 900;
-  letter-spacing: -0.06em;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--primary);
 }
 
@@ -747,7 +744,7 @@ select option {
   align-items: center;
   gap: 12px;
   padding: 13px;
-  border-radius: 16px;
+  border-radius: 10px;
   background: var(--surface-strong);
   border: 1px solid var(--line);
 }
@@ -760,7 +757,7 @@ select option {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  background: var(--primary);
   color: #fff;
   font-weight: 800;
 }
@@ -852,14 +849,14 @@ select option {
 .table-wrap {
   overflow: auto;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   background: var(--surface-strong);
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 720px;
+  min-width: 560px;
 }
 
 th,
@@ -932,8 +929,8 @@ tr:last-child td {
   height: 44px;
   display: grid;
   place-items: center;
-  border-radius: 16px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  border-radius: 10px;
+  background: var(--primary);
   color: white;
   font-weight: 900;
 }
@@ -941,7 +938,7 @@ tr:last-child td {
 .timeline-body {
   padding: 16px;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   background: var(--surface-strong);
 }
 
@@ -1105,21 +1102,21 @@ tr:last-child td {
 }
 
 .empty-state {
-  padding: 44px 20px;
+  padding: 32px 20px;
   text-align: center;
   color: var(--muted);
 }
 
 .empty-state .big-icon {
-  width: 72px;
-  height: 72px;
+  width: 48px;
+  height: 48px;
   display: grid;
   place-items: center;
-  margin: 0 auto 14px;
-  border-radius: 24px;
+  margin: 0 auto 10px;
+  border-radius: 14px;
   background: var(--primary-soft);
   color: var(--primary);
-  font-size: 36px;
+  font-size: 24px;
 }
 
 .mock-form-grid {
