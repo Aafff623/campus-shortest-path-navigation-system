@@ -1,4 +1,4 @@
-const places = [
+const FALLBACK_PLACES = [
   { id: 'teaching', name: '教学楼', type: '教学区域', icon: '🏫', x: 145, y: 95 },
   { id: 'library', name: '图书馆', type: '学习场所', icon: '📚', x: 345, y: 82 },
   { id: 'canteen', name: '食堂', type: '生活服务', icon: '🍽️', x: 520, y: 152 },
@@ -10,7 +10,7 @@ const places = [
   { id: 'playground', name: '操场', type: '体育设施', icon: '🌿', x: 320, y: 185 }
 ];
 
-const edges = [
+const FALLBACK_EDGES = [
   ['teaching', 'library', 220],
   ['teaching', 'office', 180],
   ['teaching', 'playground', 260],
@@ -27,6 +27,39 @@ const edges = [
   ['hospital', 'lab', 210],
   ['office', 'playground', 230]
 ];
+
+/* 数据来源：C 程序导出的 routes.json。fallback 是上面的硬编码数据。 */
+let places = FALLBACK_PLACES.slice();
+let edges  = FALLBACK_EDGES.slice();
+let routesIndex = new Map();   // "start|end" -> { distance, path }
+let dataSource = 'fallback';   // 'c-program' | 'fallback'
+
+/* 加载 C 程序输出的 JSON（异步）。失败/未找到时使用 fallback。 */
+async function loadCProgramData() {
+  try {
+    const res = await fetch('data/routes.json');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const json = await res.json();
+    if (Array.isArray(json.places) && json.places.length > 0) {
+      places = json.places;
+      dataSource = 'c-program (places)';
+    }
+    if (Array.isArray(json.routes)) {
+      routesIndex = new Map();
+      json.routes.forEach((r) => {
+        routesIndex.set(`${r.start}|${r.end}`, {
+          distance: r.distance,
+          path: r.path
+        });
+      });
+      if (routesIndex.size > 0) {
+        dataSource = 'c-program (places+routes)';
+      }
+    }
+  } catch (err) {
+    console.warn('未能加载 C 程序导出的 routes.json，使用内置数据。', err);
+  }
+}
 
 const navItems = [
   ['index.html', '首页', '⌂'],
@@ -166,7 +199,7 @@ function initQueryForm() {
       showError(error, '起点和终点不能相同，请重新选择。');
       return;
     }
-    const result = dijkstra(start, end);
+    const result = lookupRoute(start, end) || dijkstra(start, end);
     if (!result) {
       showError(error, '未找到可达路径，请检查地点和路径数据。');
       return;
@@ -181,13 +214,24 @@ function showError(el, message) {
   el.classList.add('show');
 }
 
+/* 优先查 C 端预计算结果；查不到返回 null */
+function lookupRoute(start, end) {
+  const hit = routesIndex.get(`${start}|${end}`);
+  if (!hit) return null;
+  return {
+    distance: hit.distance,
+    path: hit.path.slice(),
+    names: hit.path.map(placeName)
+  };
+}
+
 function initResultPage() {
   const root = document.querySelector('[data-result-root]');
   if (!root) return;
   const params = new URLSearchParams(location.search);
   const start = params.get('start') || 'teaching';
   const end = params.get('end') || 'library';
-  const result = dijkstra(start, end);
+  const result = lookupRoute(start, end) || dijkstra(start, end);
   if (!result) {
     root.innerHTML = `<div class="empty-state card"><div class="big-icon">⚠</div><h2>没有找到路径</h2><p>请返回路径查询页，重新选择合法的起点和终点。</p><a class="btn primary" href="query.html">重新查询</a></div>`;
     return;
@@ -339,8 +383,9 @@ function initInlineForms() {
   });
 }
 
-function initPage() {
+async function initPage() {
   initLayout();
+  await loadCProgramData();   /* 异步加载 C 端 JSON */
   initSelects();
   initQueryForm();
   initResultPage();
@@ -348,6 +393,22 @@ function initPage() {
   initQuickPlaces();
   initTables();
   initInlineForms();
+  showDataSourceBadge();
+}
+
+/* 在控制台和右下角小角标展示当前数据来源（review 时一眼可见） */
+function showDataSourceBadge() {
+  console.log('[campus-nav] data source:', dataSource,
+              '| places:', places.length,
+              '| routes:', routesIndex.size);
+  let badge = document.getElementById('data-source-badge');
+  if (!badge) {
+    badge = document.createElement('div');
+    badge.id = 'data-source-badge';
+    badge.style.cssText = 'position:fixed;right:12px;bottom:12px;padding:6px 10px;border-radius:6px;font-size:12px;font-family:monospace;background:#1f2937;color:#fff;opacity:0.85;z-index:9999;box-shadow:0 2px 6px rgba(0,0,0,0.3);';
+    document.body.appendChild(badge);
+  }
+  badge.textContent = `data: ${dataSource}  ·  routes: ${routesIndex.size}`;
 }
 
 document.addEventListener('DOMContentLoaded', initPage);
