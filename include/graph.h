@@ -31,8 +31,10 @@ typedef struct {
 
 /* 图：邻接表 + 索引表 */
 typedef struct {
+    const char *ids[PLACE_COUNT];    /* 字符串 id（与前端原型一致） */
     const char *names[PLACE_COUNT];
     const char *types[PLACE_COUNT];
+    const char *icons[PLACE_COUNT];  /* emoji 图标（前端渲染用） */
     int  coord_x[PLACE_COUNT];
     int  coord_y[PLACE_COUNT];
 
@@ -45,6 +47,9 @@ void graph_init(Graph *g);
 
 /* 工具：返回 place 名称，未知 id 返回 "?" */
 const char *graph_place_name(const Graph *g, int place_id);
+
+/* 工具：按字符串 id 查找 PlaceId，未找到返回 -1 */
+int graph_find_place(const Graph *g, const char *id);
 
 /* 工具：判断 id 是否合法 */
 bool graph_valid_place(const Graph *g, int place_id);

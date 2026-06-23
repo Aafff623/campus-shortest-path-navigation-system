@@ -40,8 +40,8 @@ static int export_routes_json(const Graph *g, const char *path)
     fprintf(fp, "  \"places\": [\n");
     for (int i = 0; i < PLACE_COUNT; i++) {
         fprintf(fp,
-                "    {\"id\": %d, \"name\": \"%s\", \"type\": \"%s\", \"x\": %d, \"y\": %d}%s\n",
-                i, g->names[i], g->types[i], g->coord_x[i], g->coord_y[i],
+                "    {\"id\": \"%s\", \"name\": \"%s\", \"type\": \"%s\", \"icon\": \"%s\", \"x\": %d, \"y\": %d}%s\n",
+                g->ids[i], g->names[i], g->types[i], g->icons[i], g->coord_x[i], g->coord_y[i],
                 (i == PLACE_COUNT - 1) ? "" : ",");
     }
     fprintf(fp, "  ],\n");
