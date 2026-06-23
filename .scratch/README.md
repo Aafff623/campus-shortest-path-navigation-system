@@ -6,7 +6,7 @@
 
 | 编号 | 任务 | 状态 | 依赖 |
 |------|------|------|------|
-| 1 | [setup-c-project](./setup-c-project/) | `ready-for-agent` | - |
+| 1 | [setup-c-project](./setup-c-project/) | `in_progress` | - |
 | 2 | [graph-data-structure](./graph-data-structure/) | `ready-for-agent` | #1 |
 | 3 | [dijkstra-algorithm](./dijkstra-algorithm/) | `ready-for-agent` | #2 |
 | 4 | [export-json](./export-json/) | `ready-for-agent` | #3 |
