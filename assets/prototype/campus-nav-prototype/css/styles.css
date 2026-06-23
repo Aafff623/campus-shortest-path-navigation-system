@@ -302,11 +302,11 @@ button {
 .card {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
 }
 
 .card.pad {
-  padding: 14px 16px;
+  padding: 20px;
 }
 
 .hero {
