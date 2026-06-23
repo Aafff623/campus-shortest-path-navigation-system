@@ -2,7 +2,7 @@
 
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c99 -Iinclude
-SRC = src/main.c
+SRCS = src/main.c src/graph.c
 TARGET = bin/campus_nav
 
 # Windows 与 POSIX 兼容
@@ -14,9 +14,9 @@ endif
 
 build: $(TARGET)
 
-$(TARGET): $(SRC)
+$(TARGET): $(SRCS)
 	@mkdir -p bin
-	$(CC) $(CFLAGS) $(SRC) -o $(TARGET)
+	$(CC) $(CFLAGS) $(SRCS) -o $(TARGET)
 
 run: build
 	./$(TARGET)
@@ -26,3 +26,7 @@ export: build
 
 clean:
 	rm -f $(TARGET)
+	rm -f $(EXPORT_PATH)
+
+clean-data:
+	rm -f assets/data/routes.json
