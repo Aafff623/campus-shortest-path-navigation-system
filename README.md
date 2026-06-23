@@ -14,11 +14,17 @@
 - 结果可视化：文字路径输出，如 `教学楼 → 图书馆`。
 - 异常处理：不存在的节点、起终点相同等。
 
+## 仓库
+
+GitHub private repo: `https://github.com/Aafff623/campus-shortest-path-navigation-system`
+
 ## 快速开始
 
 1. 查看整理后的需求：`requirements.md`
 2. 查看前端原型：`assets/prototype/index.html`（可直接用浏览器打开）
 3. 查看任务书原件：`docs/原始资料/课程设计任务书.doc`
+4. 查看 PRD：`PRD-校园最短路径导航系统.md`
+5. 查看任务清单：`.scratch/README.md`
 
 ## 目录结构
 
