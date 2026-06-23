@@ -1,6 +1,6 @@
 # setup-c-project
 
-**标签**: `in_progress`  
+**标签**: `ready-for-review`  
 **依赖**: 无
 
 ## 目标
