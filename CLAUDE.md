@@ -20,7 +20,9 @@
 - 前端：纯静态 HTML / CSS / JavaScript（原型已提供）
 - 算法实现：C / Java / Python 任选其一（按课程要求）
 - 构建工具：按需使用，不强制
-- 版本控制：Git + Conventional Commits
+- 版本控制：Git + GitHub private repo + Conventional Commits
+  - 远程仓库：`https://github.com/Aafff623/campus-shortest-path-navigation-system`
+  - 详细流程见 `docs/handoff/git-workflow.md`
 
 ## 目录结构
 
@@ -71,6 +73,15 @@ type(scope): subject
 - 新增资料放入 `docs/` 对应子目录。
 - `docs/原始资料/` 中的文件为只读归档，不直接修改。
 - 课程设计说明书最终版放入 `docs/reports/`。
+
+## Git 工作流
+
+1. **本地 commit**：每完成一个 `.scratch/` 任务，做一次原子 commit。
+2. **人工 review**：代码/文档先由人工检查验收标准。
+3. **通过后 push**：review 通过后，再执行 `git push origin main`。
+4. **不 push 未经 review 的内容**。
+
+详见 `docs/handoff/git-workflow.md`。
 
 ## 运行方式（待补充）
 

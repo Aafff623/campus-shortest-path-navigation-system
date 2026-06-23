@@ -20,9 +20,25 @@
 
 1. 每个任务目录下的 `README.md` 包含需求、验收标准和 review 要求。
 2. 开始任务时，将状态改为 `in_progress`。
-3. 完成后，提交代码并更新状态为 `ready-for-review`，等待人工 review。
-4. 人工 review 通过后，更新状态为 `completed`。
+3. 完成后，在本地做一次原子 commit，并将任务状态更新为 `ready-for-review`，等待人工 review。
+4. 人工 review 通过后：
+   - 更新状态为 `completed`。
+   - 执行 `git push origin main` 推送到 GitHub。
+5. **未经 review 不要 push**。
 
+## Git 命令参考
+
+```bash
+# 查看状态
+git status
+
+# 提交完成的工作
+git add -A
+git commit -m "feat(scope): description"
+
+# review 通过后推送
+git push origin main
+```
 ## 参考
 
 - PRD: `../PRD-校园最短路径导航系统.md`
