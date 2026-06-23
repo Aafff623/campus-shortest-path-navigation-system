@@ -290,6 +290,23 @@ function edgeDistance(a, b) {
   return item ? item[2] : '-';
 }
 
+const PLACE_ICON_PATHS = {
+  teaching: '<path d="M3 21h18"/><path d="M5 21V9l7-4 7 4v12"/><path d="M9 21v-6h6v6"/>',
+  library: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M8 7h8"/><path d="M8 11h8"/>',
+  canteen: '<path d="M3 11h18"/><path d="M5 11V7"/><path d="M9 11V5"/><path d="M13 11V7"/><path d="M17 11V5"/><path d="M3 15h18v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+  dorm: '<path d="M3 10.5 12 4l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  gym: '<ellipse cx="12" cy="12" rx="9" ry="5"/><path d="M3 12h18"/><path d="M7 9v6"/><path d="M17 9v6"/>',
+  lab: '<path d="M9 3h6"/><path d="M10 3v5.5L5.5 18a2 2 0 0 0 1.7 3h9.6a2 2 0 0 0 1.7-3L14 8.5V3"/><path d="M8.5 14h7"/>',
+  hospital: '<path d="M12 7v10"/><path d="M7 12h10"/><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"/>',
+  office: '<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18"/><path d="M6 12h12"/><path d="M10 6h.01"/><path d="M14 6h.01"/><path d="M10 10h.01"/><path d="M14 10h.01"/><path d="M10 14h.01"/><path d="M14 14h.01"/><path d="M10 18h.01"/><path d="M14 18h.01"/>',
+  playground: '<path d="M12 22c4-4 7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 3 8 7 12z"/><path d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>'
+};
+
+function placeIconMarkup(id) {
+  const paths = PLACE_ICON_PATHS[id] || PLACE_ICON_PATHS.teaching;
+  return `<svg class="map-place-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
+}
+
 function renderMap(activePath = []) {
   const activePairs = new Set();
   activePath.slice(0, -1).forEach((id, index) => {
@@ -304,10 +321,11 @@ function renderMap(activePath = []) {
   }).join('');
   const nodes = places.map((p) => {
     const active = activePath.includes(p.id);
-    return `<g class="map-node" transform="translate(${p.x}, ${p.y})">
-      <circle r="${active ? 19 : 15}" />
-      <text text-anchor="middle" y="5" font-size="14" font-weight="800">${p.name.slice(0, 2)}</text>
-      <text text-anchor="middle" y="39">${p.name}</text>
+    const radius = active ? 20 : 17;
+    return `<g class="map-node ${active ? 'is-active' : ''}" data-place="${p.id}" transform="translate(${p.x}, ${p.y})">
+      <circle class="map-node-bg" r="${radius}" />
+      <g class="map-node-icon" transform="translate(-9, -9)">${placeIconMarkup(p.id)}</g>
+      <text class="map-node-label" text-anchor="middle" y="${radius + 15}">${p.name}</text>
     </g>`;
   }).join('');
 

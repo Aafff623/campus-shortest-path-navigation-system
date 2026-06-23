@@ -36,32 +36,32 @@
             </div>
           </div>
           <div class="grid two">
-            <form class="form form-compact" data-query-form>
-              <div class="route-points">
-                <div class="route-point">
-                  <label for="start">起点</label>
-                  <div class="input-wrap input-wrap-compact">
-                    <span class="input-icon">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 22s7-7.5 7-12a7 7 0 0 0-14 0c0 4.5 7 12 7 12z"/></svg>
-                    </span>
-                    <select id="start" name="start" data-place-select></select>
+            <form class="form form-compact query-form" data-query-form>
+              <div class="route-bar">
+                <div class="route-rail" aria-hidden="true">
+                  <span class="route-rail-dot is-start"></span>
+                  <span class="route-rail-line"></span>
+                  <span class="route-rail-dot is-end"></span>
+                </div>
+                <div class="route-fields">
+                  <div class="route-field">
+                    <label class="route-field-label" for="start">起点</label>
+                    <div class="input-wrap input-wrap-compact input-wrap-inset">
+                      <select id="start" name="start" data-place-select></select>
+                    </div>
                   </div>
-                </div>
-                <div class="route-points-divider" aria-hidden="true">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 5l7 7-7 7"/></svg>
-                </div>
-                <div class="route-point">
-                  <label for="end">终点</label>
-                  <div class="input-wrap input-wrap-compact">
-                    <span class="input-icon">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4h13l-3 4 3 4H4"/></svg>
-                    </span>
-                    <select id="end" name="end" data-place-select data-default="library"></select>
+                  <div class="route-field">
+                    <label class="route-field-label" for="end">终点</label>
+                    <div class="input-wrap input-wrap-compact input-wrap-inset">
+                      <select id="end" name="end" data-place-select data-default="library"></select>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="alert" data-query-error></div>
-              <button class="btn primary" type="submit">查询最短路径</button>
+              <div class="query-form-actions">
+                <button class="btn primary" type="submit">查询最短路径</button>
+              </div>
             </form>
             <div class="card map-card is-compact" data-campus-map></div>
           </div>
