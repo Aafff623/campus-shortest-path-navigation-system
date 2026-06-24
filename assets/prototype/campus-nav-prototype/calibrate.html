@@ -38,7 +38,7 @@
         </div>
       </header>
 
-      <iframe class="calibrate-frame" src="tools/coordinate-debug-tool.html" title="坐标标定工具"></iframe>
+      <iframe class="calibrate-frame" src="tools/coordinate-debug-tool.html" title="坐标标定工具" onload="this.contentWindow.postMessage({type:'set-theme',theme:document.body.dataset.theme||'blue'},'*')"></iframe>
     </main>
   </div>
 

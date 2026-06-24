@@ -20,6 +20,30 @@
     .measure-line { fill: none; stroke: #0f172a; stroke-width: 2; stroke-dasharray: 6 4; pointer-events: none; }
     .measure-label { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; fill: #0f172a; pointer-events: none; }
     .sidebar { width: 340px; flex-shrink: 0; }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="blue"]) { background: #0f172a; color: #e2e8f0; }
+      body:not([data-theme="blue"]) header { background: #1e293b; border-color: #334155; }
+      body:not([data-theme="blue"]) .stage { background: #1e293b; }
+      body:not([data-theme="blue"]) .panel { background: #1e293b; }
+      body:not([data-theme="blue"]) .log { background: #0f172a; color: #e2e8f0; }
+      body:not([data-theme="blue"]) .coord { color: #60a5fa; }
+      body:not([data-theme="blue"]) .muted { color: #94a3b8; }
+      body:not([data-theme="blue"]) .btn.secondary { background: #334155; color: #e2e8f0; }
+      body:not([data-theme="blue"]) .measure-line { stroke: #e2e8f0; }
+      body:not([data-theme="blue"]) .measure-label { fill: #e2e8f0; }
+      body:not([data-theme="blue"]) #mapImage { filter: brightness(0.55) sepia(0.25) saturate(0.8); }
+    }
+    body[data-theme="dark"] { background: #0f172a; color: #e2e8f0; }
+    body[data-theme="dark"] header { background: #1e293b; border-color: #334155; }
+    body[data-theme="dark"] .stage { background: #1e293b; }
+    body[data-theme="dark"] .panel { background: #1e293b; }
+    body[data-theme="dark"] .log { background: #0f172a; color: #e2e8f0; }
+    body[data-theme="dark"] .coord { color: #60a5fa; }
+    body[data-theme="dark"] .muted { color: #94a3b8; }
+    body[data-theme="dark"] .btn.secondary { background: #334155; color: #e2e8f0; }
+    body[data-theme="dark"] .measure-line { stroke: #e2e8f0; }
+    body[data-theme="dark"] .measure-label { fill: #e2e8f0; }
+    body[data-theme="dark"] #mapImage { filter: brightness(0.55) sepia(0.25) saturate(0.8); }
     .panel { background: #ffffff; border-radius: 12px; padding: 16px; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
     .panel h2 { margin: 0 0 10px; font-size: 15px; }
     .coord { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 18px; color: #2563eb; }
@@ -123,6 +147,12 @@
     if (window.self !== window.top) {
       document.body.classList.add('embedded');
     }
+
+    window.addEventListener('message', (e) => {
+      if (e.data && e.data.type === 'set-theme') {
+        document.body.dataset.theme = e.data.theme;
+      }
+    });
 
     svg.addEventListener('click', (e) => {
       const p = svgPointFromEvent(e);

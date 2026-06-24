@@ -125,6 +125,11 @@ function setTheme(theme) {
   document.querySelectorAll('[data-theme-btn]').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.themeBtn === theme);
   });
+  document.querySelectorAll('.calibrate-frame').forEach((frame) => {
+    if (frame.contentWindow) {
+      frame.contentWindow.postMessage({ type: 'set-theme', theme }, '*');
+    }
+  });
 }
 
 function buildGraph() {
