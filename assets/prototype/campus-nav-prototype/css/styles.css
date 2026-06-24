@@ -326,10 +326,6 @@ button {
   flex-shrink: 0;
 }
 
-.footer-note {
-  margin-top: auto;
-}
-
 .query-section:last-child {
   flex: 1 0 auto;
   display: flex;
