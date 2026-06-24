@@ -1,5 +1,7 @@
 # 校园最短路径导航系统
 
+![校园最短路径导航系统 Banner](docs/images/readme-banner.png)
+
 中北大学软件学院《数据结构》课程设计项目。
 
 ## 项目简介
