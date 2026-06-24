@@ -123,9 +123,9 @@ C 后端 (Dijkstra)
 - 底图：`assets/prototype/campus-nav-prototype/images/nuc-campus-map-official.jpg`
 - 坐标配置：`assets/prototype/campus-nav-prototype/data/campus-layout.json`
 - 状态：`official-map-manual-calibrated-v1`（第一轮人工标定）
-- 坐标标定工具：`assets/prototype/campus-nav-prototype/tools/coordinate-debug-tool.html`
+- 坐标标定工具：`assets/prototype/campus-nav-prototype/tools/coordinate-debug-tool.html`（内置近似比例尺 **1:20000**，图上 1cm ≈ 200m，支持两点距离估算）
 
-> 官方图分辨率有限，部分建筑名称无法 100% 确认；当前坐标按功能区与可见建筑做了最佳估计，可在 `calibrate.html` 中继续精调。
+> 官方图分辨率有限，部分建筑名称无法 100% 确认；当前坐标按功能区与可见建筑做了最佳估计，可在 `calibrate.html` 中继续精调。比例尺根据图中田径场一圈约 800m 估算，仅用于课程设计 Demo，不作为 GIS 精确测量依据。
 
 ---
 
