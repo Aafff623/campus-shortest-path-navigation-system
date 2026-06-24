@@ -17,6 +17,8 @@
     .stage { position: relative; flex: 1; min-width: 0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.08); background: #ffffff; }
     .stage svg { display: block; width: 100%; height: auto; cursor: crosshair; }
     .crosshair { fill: none; stroke: #dc2626; stroke-width: 2; pointer-events: none; }
+    .measure-line { fill: none; stroke: #0f172a; stroke-width: 2; stroke-dasharray: 6 4; pointer-events: none; }
+    .measure-label { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; fill: #0f172a; pointer-events: none; }
     .sidebar { width: 340px; flex-shrink: 0; }
     .panel { background: #ffffff; border-radius: 12px; padding: 16px; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
     .panel h2 { margin: 0 0 10px; font-size: 15px; }
@@ -37,6 +39,7 @@
     <div class="stage">
       <svg id="mapSvg" viewBox="0 0 1024 682" preserveAspectRatio="xMidYMid meet">
         <image id="mapImage" href="../images/nuc-campus-map-official.jpg" width="1024" height="682" />
+        <g id="measureLines"></g>
         <g id="markers"></g>
         <line id="cursorX" class="crosshair" x1="0" y1="0" x2="1024" y2="0" />
         <line id="cursorY" class="crosshair" x1="0" y1="0" x2="0" y2="682" />
@@ -57,6 +60,20 @@
         </div>
       </div>
       <div class="panel">
+        <h2>距离测量</h2>
+        <div class="log" id="distanceLog">点击地图记录至少两个点以测量距离。</div>
+        <div style="margin-top:10px;">
+          <label class="muted" style="display:block;margin-bottom:4px;">标尺：两点间实际距离（米）</label>
+          <input id="scaleInput" type="number" min="0" step="0.1" placeholder="例如 100" style="width:120px;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;">
+          <button class="btn" id="setScaleBtn" style="margin-left:6px;">设为标尺</button>
+        </div>
+        <div class="actions">
+          <button class="btn secondary" id="undoBtn">撤销</button>
+          <button class="btn secondary" id="clearMeasureBtn">清空</button>
+        </div>
+      </div>
+
+      <div class="panel">
         <h2>使用说明</h2>
         <ol class="muted">
           <li>把真实底图（官方 JPG / 3D 投影 PNG）替换 <code>images/</code> 下的文件。</li>
@@ -76,13 +93,22 @@
     const liveCoord = document.getElementById('liveCoord');
     const log = document.getElementById('log');
     const markers = document.getElementById('markers');
+    const measureLines = document.getElementById('measureLines');
+    const distanceLog = document.getElementById('distanceLog');
+    const scaleInput = document.getElementById('scaleInput');
     let points = [];
+    let scaleMeters = null;
+    let scalePixels = null;
 
     function svgPointFromEvent(evt) {
       const pt = svg.createSVGPoint();
       pt.x = evt.clientX;
       pt.y = evt.clientY;
       return pt.matrixTransform(svg.getScreenCTM().inverse());
+    }
+
+    function distance(a, b) {
+      return Math.hypot(a[0] - b[0], a[1] - b[1]);
     }
 
     svg.addEventListener('mousemove', (e) => {
@@ -103,24 +129,89 @@
       const x = Math.round(p.x);
       const y = Math.round(p.y);
       points.push([x, y]);
-
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('cx', x);
-      circle.setAttribute('cy', y);
-      circle.setAttribute('r', 6);
-      circle.setAttribute('fill', '#dc2626');
-      circle.setAttribute('opacity', '0.85');
-      markers.appendChild(circle);
-
+      renderMarkers();
+      renderMeasurements();
       renderLog();
     });
+
+    function renderMarkers() {
+      markers.innerHTML = '';
+      points.forEach((pt, i) => {
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', pt[0]);
+        circle.setAttribute('cy', pt[1]);
+        circle.setAttribute('r', 6);
+        circle.setAttribute('fill', '#dc2626');
+        circle.setAttribute('opacity', '0.85');
+        markers.appendChild(circle);
+
+        const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        label.setAttribute('x', pt[0] + 9);
+        label.setAttribute('y', pt[1] - 9);
+        label.setAttribute('font-size', '12');
+        label.setAttribute('font-family', 'ui-monospace, SFMono-Regular, Menlo, monospace');
+        label.setAttribute('fill', '#dc2626');
+        label.textContent = i + 1;
+        markers.appendChild(label);
+      });
+    }
+
+    function renderMeasurements() {
+      measureLines.innerHTML = '';
+      for (let i = 1; i < points.length; i++) {
+        const a = points[i - 1];
+        const b = points[i];
+        const d = distance(a, b);
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', a[0]);
+        line.setAttribute('y1', a[1]);
+        line.setAttribute('x2', b[0]);
+        line.setAttribute('y2', b[1]);
+        line.setAttribute('class', 'measure-line');
+        measureLines.appendChild(line);
+
+        const midX = (a[0] + b[0]) / 2;
+        const midY = (a[1] + b[1]) / 2;
+        const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        label.setAttribute('x', midX + 6);
+        label.setAttribute('y', midY - 6);
+        label.setAttribute('class', 'measure-label');
+        label.textContent = `${Math.round(d)}px`;
+        measureLines.appendChild(label);
+      }
+    }
 
     function renderLog() {
       if (points.length === 0) {
         log.textContent = '点击地图开始记录…';
+      } else {
+        log.textContent = points.map((pt, i) => `${String(i + 1).padStart(2, '0')}: [${pt[0]}, ${pt[1]}]`).join('\n');
+      }
+      updateDistanceLog();
+    }
+
+    function updateDistanceLog() {
+      if (points.length < 2) {
+        distanceLog.textContent = '点击地图记录至少两个点以测量距离。';
         return;
       }
-      log.textContent = points.map((pt, i) => `${String(i + 1).padStart(2, '0')}: [${pt[0]}, ${pt[1]}]`).join('\n');
+
+      const last = points[points.length - 1];
+      const prev = points[points.length - 2];
+      const px = distance(prev, last);
+      let text = `最近两点 (${points.length - 1}→${points.length})：${Math.round(px)} px`;
+
+      if (scalePixels > 0 && scaleMeters > 0) {
+        const ratio = scaleMeters / scalePixels;
+        const real = px * ratio;
+        text += `\n估算实际距离：${real.toFixed(2)} m`;
+        text += `\n比例尺：1 px ≈ ${ratio.toFixed(4)} m`;
+      } else {
+        text += '\n尚未设置标尺。输入实际距离后点击「设为标尺」。';
+      }
+
+      distanceLog.textContent = text;
     }
 
     document.getElementById('copyBtn').addEventListener('click', async () => {
@@ -134,7 +225,46 @@
 
     document.getElementById('clearBtn').addEventListener('click', () => {
       points = [];
+      scaleMeters = null;
+      scalePixels = null;
       markers.innerHTML = '';
+      measureLines.innerHTML = '';
+      scaleInput.value = '';
+      renderLog();
+    });
+
+    document.getElementById('setScaleBtn').addEventListener('click', () => {
+      if (points.length < 2) {
+        alert('请先记录至少两个点');
+        return;
+      }
+      const meters = parseFloat(scaleInput.value);
+      if (!isFinite(meters) || meters <= 0) {
+        alert('请输入大于 0 的实际距离');
+        return;
+      }
+      const last = points[points.length - 1];
+      const prev = points[points.length - 2];
+      scalePixels = distance(prev, last);
+      scaleMeters = meters;
+      updateDistanceLog();
+    });
+
+    document.getElementById('undoBtn').addEventListener('click', () => {
+      if (points.length === 0) return;
+      points.pop();
+      renderMarkers();
+      renderMeasurements();
+      renderLog();
+    });
+
+    document.getElementById('clearMeasureBtn').addEventListener('click', () => {
+      points = [];
+      scaleMeters = null;
+      scalePixels = null;
+      markers.innerHTML = '';
+      measureLines.innerHTML = '';
+      scaleInput.value = '';
       renderLog();
     });
   </script>
