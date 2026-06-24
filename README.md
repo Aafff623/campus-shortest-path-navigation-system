@@ -11,7 +11,7 @@
 - 地点录入：教学楼、食堂、宿舍、图书馆等。
 - 路径维护：地点之间的路径长度。
 - 最短路径查询：任意两点间的最短路径及总距离。
-- 结果可视化：文字路径输出，如 `教学楼 → 图书馆`。
+- 结果可视化：文字路径输出，如 `教学楼 → 图书馆`；并在 2D 校园平面图上高亮路径。
 - 异常处理：不存在的节点、起终点相同等。
 
 ## 仓库
@@ -21,7 +21,7 @@ GitHub public repo: `https://github.com/Aafff623/campus-shortest-path-navigation
 ## 快速开始
 
 1. 查看整理后的需求：`requirements.md`
-2. 查看前端原型：`assets/prototype/campus-nav-prototype/index.html`（可直接用浏览器打开，或启动 `python -m http.server`）
+2. 查看前端原型：`assets/prototype/campus-nav-prototype/index.html`（可直接用浏览器打开，或启动 `python -m http.server`；推荐端口见 `docs/handoff/运行说明.md`）
 3. 查看任务书原件：`docs/原始资料/课程设计任务书.doc`
 4. 查看 PRD：
    - `PRD-校园最短路径导航系统.md`
@@ -58,6 +58,16 @@ GitHub public repo: `https://github.com/Aafff623/campus-shortest-path-navigation
 ├── CLAUDE.md               # 项目规范
 └── README.md               # 本文件
 ```
+
+## 2D 校园图 overlay
+
+前端已接入中北大学本科招生信息网官方校园平面图：
+
+- 底图：`assets/prototype/campus-nav-prototype/images/nuc-campus-map-official.jpg`
+- 坐标配置：`assets/prototype/campus-nav-prototype/data/campus-layout.json`
+- 坐标标定工具：`assets/prototype/campus-nav-prototype/tools/coordinate-debug-tool.html`
+
+当前坐标为草稿值（由示意 schematic 等比缩放得到），尚未根据真实建筑位置精确校准。校准方式见工具内说明。
 
 ## 技术栈
 

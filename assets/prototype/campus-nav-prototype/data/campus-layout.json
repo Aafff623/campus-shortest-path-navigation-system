@@ -1,0 +1,439 @@
+{
+  "version": "0.2.1",
+  "status": "official-map-manual-calibrated-v1",
+  "note": "本文件已使用中北大学本科招生信息网官方校园平面图作为底图。坐标根据官方图进行了第一轮人工标定，道路 polyline 为近似折线，后续可继续微调。",
+  "map": {
+    "name": "中北大学官方校园平面图（草稿坐标）",
+    "image": "images/nuc-campus-map-official.jpg",
+    "previewImage": "images/nuc-campus-map-official.jpg",
+    "width": 1024,
+    "height": 682,
+    "coordinateSystem": "SVG pixel coordinate; origin top-left; x right, y down",
+    "source": "中北大学本科招生信息网 https://zbzs.nuc.edu.cn/info/1002/2385.htm"
+  },
+  "places": {
+    "teaching": {
+      "name": "教学楼",
+      "type": "教学区域",
+      "icon": "🏫",
+      "x": 590,
+      "y": 230,
+      "labelOffset": [
+        0,
+        -24
+      ],
+      "zone": "northwest-academic"
+    },
+    "library": {
+      "name": "图书馆",
+      "type": "学习场所",
+      "icon": "📚",
+      "x": 358,
+      "y": 238,
+      "labelOffset": [
+        0,
+        -24
+      ],
+      "zone": "north-academic"
+    },
+    "hospital": {
+      "name": "校医院",
+      "type": "公共服务",
+      "icon": "🏥",
+      "x": 732,
+      "y": 242,
+      "labelOffset": [
+        0,
+        -24
+      ],
+      "zone": "northeast-service"
+    },
+    "canteen": {
+      "name": "食堂",
+      "type": "生活服务",
+      "icon": "🍽️",
+      "x": 600,
+      "y": 260,
+      "labelOffset": [
+        0,
+        -24
+      ],
+      "zone": "east-dining"
+    },
+    "lab": {
+      "name": "实验楼",
+      "type": "教学区域",
+      "icon": "🧪",
+      "x": 820,
+      "y": 135,
+      "labelOffset": [
+        0,
+        32
+      ],
+      "zone": "east-academic"
+    },
+    "gym": {
+      "name": "体育馆",
+      "type": "体育设施",
+      "icon": "🏟️",
+      "x": 330,
+      "y": 350,
+      "labelOffset": [
+        0,
+        32
+      ],
+      "zone": "southeast-sports"
+    },
+    "playground": {
+      "name": "操场",
+      "type": "体育设施",
+      "icon": "🌿",
+      "x": 395,
+      "y": 305,
+      "labelOffset": [
+        0,
+        32
+      ],
+      "zone": "center-sports"
+    },
+    "dorm": {
+      "name": "宿舍区",
+      "type": "生活区域",
+      "icon": "🏠",
+      "x": 250,
+      "y": 330,
+      "labelOffset": [
+        0,
+        32
+      ],
+      "zone": "southwest-living"
+    },
+    "office": {
+      "name": "行政楼",
+      "type": "办公区域",
+      "icon": "🏢",
+      "x": 170,
+      "y": 240,
+      "labelOffset": [
+        0,
+        32
+      ],
+      "zone": "west-admin"
+    }
+  },
+  "edges": [
+    {
+      "source": "teaching",
+      "target": "library",
+      "distance": 220
+    },
+    {
+      "source": "teaching",
+      "target": "office",
+      "distance": 180
+    },
+    {
+      "source": "teaching",
+      "target": "playground",
+      "distance": 260
+    },
+    {
+      "source": "library",
+      "target": "canteen",
+      "distance": 210
+    },
+    {
+      "source": "library",
+      "target": "hospital",
+      "distance": 300
+    },
+    {
+      "source": "library",
+      "target": "playground",
+      "distance": 140
+    },
+    {
+      "source": "canteen",
+      "target": "lab",
+      "distance": 240
+    },
+    {
+      "source": "canteen",
+      "target": "gym",
+      "distance": 190
+    },
+    {
+      "source": "dorm",
+      "target": "office",
+      "distance": 170
+    },
+    {
+      "source": "dorm",
+      "target": "playground",
+      "distance": 160
+    },
+    {
+      "source": "dorm",
+      "target": "gym",
+      "distance": 260
+    },
+    {
+      "source": "gym",
+      "target": "lab",
+      "distance": 280
+    },
+    {
+      "source": "gym",
+      "target": "playground",
+      "distance": 170
+    },
+    {
+      "source": "hospital",
+      "target": "lab",
+      "distance": 210
+    },
+    {
+      "source": "office",
+      "target": "playground",
+      "distance": 230
+    }
+  ],
+  "edgePolylines": {
+    "teaching|library": [
+      [
+        590,
+        230
+      ],
+      [
+        474,
+        230
+      ],
+      [
+        358,
+        238
+      ]
+    ],
+    "teaching|office": [
+      [
+        590,
+        230
+      ],
+      [
+        380,
+        230
+      ],
+      [
+        170,
+        240
+      ]
+    ],
+    "teaching|playground": [
+      [
+        590,
+        230
+      ],
+      [
+        492,
+        230
+      ],
+      [
+        395,
+        305
+      ]
+    ],
+    "library|canteen": [
+      [
+        358,
+        238
+      ],
+      [
+        479,
+        238
+      ],
+      [
+        600,
+        260
+      ]
+    ],
+    "library|hospital": [
+      [
+        358,
+        238
+      ],
+      [
+        545,
+        238
+      ],
+      [
+        732,
+        242
+      ]
+    ],
+    "library|playground": [
+      [
+        358,
+        238
+      ],
+      [
+        358,
+        271
+      ],
+      [
+        395,
+        305
+      ]
+    ],
+    "canteen|lab": [
+      [
+        600,
+        260
+      ],
+      [
+        710,
+        260
+      ],
+      [
+        820,
+        135
+      ]
+    ],
+    "canteen|gym": [
+      [
+        600,
+        260
+      ],
+      [
+        465,
+        260
+      ],
+      [
+        330,
+        350
+      ]
+    ],
+    "dorm|office": [
+      [
+        250,
+        330
+      ],
+      [
+        250,
+        285
+      ],
+      [
+        170,
+        240
+      ]
+    ],
+    "dorm|playground": [
+      [
+        250,
+        330
+      ],
+      [
+        322,
+        330
+      ],
+      [
+        395,
+        305
+      ]
+    ],
+    "dorm|gym": [
+      [
+        250,
+        330
+      ],
+      [
+        290,
+        330
+      ],
+      [
+        330,
+        350
+      ]
+    ],
+    "gym|lab": [
+      [
+        330,
+        350
+      ],
+      [
+        575,
+        242
+      ],
+      [
+        820,
+        135
+      ]
+    ],
+    "gym|playground": [
+      [
+        330,
+        350
+      ],
+      [
+        362,
+        350
+      ],
+      [
+        395,
+        305
+      ]
+    ],
+    "hospital|lab": [
+      [
+        732,
+        242
+      ],
+      [
+        732,
+        188
+      ],
+      [
+        820,
+        135
+      ]
+    ],
+    "office|playground": [
+      [
+        170,
+        240
+      ],
+      [
+        282,
+        240
+      ],
+      [
+        395,
+        305
+      ]
+    ]
+  },
+  "roadStyle": {
+    "stroke": "#94a3b8",
+    "strokeWidth": 16,
+    "centerLineStroke": "#f8fafc",
+    "centerLineWidth": 6,
+    "activeStroke": "var(--primary)",
+    "activeStrokeWidth": 10
+  },
+  "calibration": {
+    "method": "manual marker calibration on official map (round 1)",
+    "metersPerPixel": null,
+    "realWorldBounds": null,
+    "draftScale": {
+      "from": [
+        1600,
+        900
+      ],
+      "to": [
+        1024,
+        682
+      ],
+      "sx": 0.64,
+      "sy": 0.757778
+    },
+    "notes": "2026-06-24: 根据官方校园平面图对 9 个地点坐标进行了人工标定，并重新生成 edgePolylines。"
+  }
+}

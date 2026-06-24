@@ -807,6 +807,11 @@ select option {
   font-weight: 700;
   font-size: 11px;
   pointer-events: none;
+  paint-order: stroke;
+  stroke: var(--surface-strong);
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .map-node[data-place="teaching"] { --node-accent: #2563eb; }
@@ -829,10 +834,14 @@ select option {
 .map-node[data-place="office"] .map-node-bg { stroke: #4f46e5; }
 .map-node[data-place="playground"] .map-node-bg { stroke: #16a34a; }
 
+.campus-map-image { pointer-events: none; }
+
 .map-edge {
+  fill: none;
   stroke: var(--map-road);
   stroke-width: 5;
   stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .map-edge.active {

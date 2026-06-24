@@ -16,7 +16,7 @@
 
 - 录入地点与路径长度。
 - 查询任意两点间最短路径及距离。
-- 文字形式输出路径。
+- 文字形式输出路径，并在 2D 校园平面图上高亮显示。
 - 处理异常输入。
 - 亮/暗主题切换与基础数据管理界面。
 
@@ -29,10 +29,10 @@
 
 ## Architecture notes
 
-- 前端：纯静态 HTML/CSS/JS 原型，4 个页面（index / query / data / docs），读取 `assets/data/routes.json`。
+- 前端：纯静态 HTML/CSS/JS 原型，4 个页面（index / query / data / docs），读取 `assets/data/routes.json`。同时通过 `campus-layout.json` 加载 2D 校园平面图作为地图底图，以 `routes.json` 为算法结果 source of truth。
 - 算法：C99 实现 Dijkstra，通过 `bin/campus_nav --export` 导出 `routes.json`；前端同时保留一份 JS 实现用于演示。
-- 数据：地点与路径数据由 C 程序生成，前端仅做展示与交互。
-- 视觉：近期完成一次去 AI 化视觉收紧，见 `docs/handoff/frontend-visual-polish-progress-handoff.md`。
+- 数据：地点与路径数据由 C 程序生成，前端仅做展示与交互；展示层坐标独立维护于 `campus-layout.json`。
+- 视觉：近期完成一次去 AI 化视觉收紧，见 `docs/handoff/frontend-visual-polish-progress-handoff.md`；当前已接入官方校园平面图作为地图底图。
 
 ## Decisions
 

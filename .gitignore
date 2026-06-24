@@ -21,4 +21,5 @@ Thumbs.db
 *current.png
 
 # Local http server data mirror (the source of truth is assets/data/routes.json)
-assets/prototype/campus-nav-prototype/data/
+assets/prototype/campus-nav-prototype/data/*
+!assets/prototype/campus-nav-prototype/data/campus-layout.json

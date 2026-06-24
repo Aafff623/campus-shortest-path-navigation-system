@@ -33,6 +33,7 @@ let places = FALLBACK_PLACES.slice();
 let edges  = FALLBACK_EDGES.slice();
 let routesIndex = new Map();   // "start|end" -> { distance, path }
 let dataSource = 'fallback';   // 'c-program' | 'fallback'
+let campusLayout = null;       // 2D 校园图配置（campus-layout.json）
 
 /* 加载 C 程序输出的 JSON（异步）。失败/未找到时使用 fallback。 */
 async function loadCProgramData() {
@@ -66,11 +67,27 @@ async function loadCProgramData() {
   }
 }
 
+/* 加载 2D 校园图布局配置（异步）。失败时保持 null，后续 renderMap 回退到旧版抽象地图。 */
+async function loadCampusLayout() {
+  try {
+    const res = await fetch('data/campus-layout.json?_=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const json = await res.json();
+    if (json && json.map && json.places) {
+      campusLayout = json;
+    }
+  } catch (err) {
+    console.warn('未能加载 campus-layout.json，使用内置坐标。', err);
+    campusLayout = null;
+  }
+}
+
 const navItems = [
   ['index.html', '首页', '⌂'],
   ['query.html', '路径查询', '⌕'],
   ['data.html', '数据管理', '▦'],
-  ['docs.html', '系统说明', 'ⓘ']
+  ['docs.html', '系统说明', 'ⓘ'],
+  ['calibrate.html', '坐标标定', '✚']
 ];
 
 function currentPage() {
@@ -325,27 +342,20 @@ function renderMap(activePath = []) {
     const pair = [id, activePath[index + 1]].sort().join('-');
     activePairs.add(pair);
   });
+
+  /* 若加载了 campus-layout.json，使用 2D 校园图 overlay */
+  if (campusLayout && campusLayout.map && campusLayout.places) {
+    return renderCampusOverlay(activePath, activePairs);
+  }
+
+  /* 否则回退到旧版抽象网格地图 */
   const edgeLines = edges.map(([a, b]) => {
     const pa = places.find((p) => p.id === a);
     const pb = places.find((p) => p.id === b);
     const active = activePairs.has([a, b].sort().join('-'));
     return `<line class="map-edge ${active ? 'active' : ''}" x1="${pa.x}" y1="${pa.y}" x2="${pb.x}" y2="${pb.y}" />`;
   }).join('');
-  const nodes = places.map((p) => {
-    const active = activePath.includes(p.id);
-    const radius = active ? 22 : 19;
-    const color = PLACE_COLORS[p.id] || PLACE_COLORS.teaching;
-    const iconScale = active ? 0.92 : 0.84;
-    const iconPaths = PLACE_ICON_PATHS[p.id] || PLACE_ICON_PATHS.teaching;
-    return `<g class="map-node ${active ? 'is-active' : ''}" data-place="${p.id}" transform="translate(${p.x}, ${p.y})">
-      <circle class="map-node-bg" r="${radius}" fill="#ffffff" stroke="${color}" stroke-width="${active ? 3 : 2.4}" />
-      <circle class="map-node-tint" r="${radius - 4}" fill="${color}" opacity="0.14" />
-      <g class="map-node-icon" transform="translate(-12,-12) scale(${iconScale})" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        ${iconPaths}
-      </g>
-      <text class="map-node-label" text-anchor="middle" y="${radius + 16}">${p.name}</text>
-    </g>`;
-  }).join('');
+  const nodes = places.map((p) => renderMapNode(p, activePath.includes(p.id))).join('');
 
   return `<svg class="campus-map" viewBox="0 0 760 390" role="img" aria-label="校园路径地图">
     <defs>
@@ -361,6 +371,67 @@ function renderMap(activePath = []) {
     ${edgeLines}
     ${nodes}
   </svg>`;
+}
+
+function renderCampusOverlay(activePath, activePairs) {
+  const map = campusLayout.map;
+  const layoutPlaces = campusLayout.places;
+  const polylines = campusLayout.edgePolylines || {};
+  const mapWidth = map.width || 1024;
+  const mapHeight = map.height || 682;
+
+  /* 道路 / 边 */
+  const edgeLines = edges.map(([a, b]) => {
+    const key = [a, b].sort().join('|');
+    const pts = polylines[key];
+    const active = activePairs.has([a, b].sort().join('-'));
+    if (Array.isArray(pts) && pts.length >= 2) {
+      const points = pts.map(([x, y]) => `${x},${y}`).join(' ');
+      return `<polyline class="map-edge ${active ? 'active' : ''}" points="${points}" />`;
+    }
+    /* 没有 polyline 时画直线 fallback */
+    const pa = layoutPlaces[a];
+    const pb = layoutPlaces[b];
+    if (!pa || !pb) return '';
+    return `<line class="map-edge ${active ? 'active' : ''}" x1="${pa.x}" y1="${pa.y}" x2="${pb.x}" y2="${pb.y}" />`;
+  }).join('');
+
+  /* 地点 marker */
+  const nodes = Object.keys(layoutPlaces).map((id) => {
+    const p = layoutPlaces[id];
+    const active = activePath.includes(id);
+    return renderMapNode({ id, name: p.name, x: p.x, y: p.y }, active);
+  }).join('');
+
+  return `<svg class="campus-map" viewBox="0 0 ${mapWidth} ${mapHeight}" role="img" aria-label="校园路径地图">
+    <defs>
+      <linearGradient id="routeGradient" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0%" stop-color="var(--primary)" />
+        <stop offset="100%" stop-color="var(--primary-2)" />
+      </linearGradient>
+    </defs>
+    <image class="campus-map-image" href="${map.image}" width="${mapWidth}" height="${mapHeight}" />
+    ${edgeLines}
+    ${nodes}
+  </svg>`;
+}
+
+function renderMapNode(p, active) {
+  const radius = active ? 22 : 19;
+  const color = PLACE_COLORS[p.id] || PLACE_COLORS.teaching;
+  const iconScale = active ? 0.92 : 0.84;
+  const iconPaths = PLACE_ICON_PATHS[p.id] || PLACE_ICON_PATHS.teaching;
+  const labelY = (p.labelOffset && typeof p.labelOffset[1] === 'number')
+    ? p.labelOffset[1]
+    : radius + 16;
+  return `<g class="map-node ${active ? 'is-active' : ''}" data-place="${p.id}" transform="translate(${p.x}, ${p.y})">
+    <circle class="map-node-bg" r="${radius}" fill="#ffffff" stroke="${color}" stroke-width="${active ? 3 : 2.4}" />
+    <circle class="map-node-tint" r="${radius - 4}" fill="${color}" opacity="0.14" />
+    <g class="map-node-icon" transform="translate(-12,-12) scale(${iconScale})" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      ${iconPaths}
+    </g>
+    <text class="map-node-label" text-anchor="middle" y="${labelY}">${p.name}</text>
+  </g>`;
 }
 
 function initMapPlaceholders() {
@@ -585,6 +656,7 @@ function initTabs() {
 async function initPage() {
   initLayout();
   await loadCProgramData();   /* 异步加载 C 端 JSON */
+  await loadCampusLayout();   /* 异步加载 2D 校园图布局 */
   initSelects();
   initTabs();
   initQueryForm();

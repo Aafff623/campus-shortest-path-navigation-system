@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+<defs>
+  <linearGradient id="bgGrad" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#f1f5f9"/></linearGradient>
+  <filter id="nodeShadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.15"/></filter>
+</defs>
+<rect width="1600" height="900" fill="url(#bgGrad)"/>
+<path d="M80,120 C240,50 520,60 800,80 C1100,100 1420,70 1520,180 C1560,320 1500,620 1380,760 C1150,860 720,840 460,800 C240,760 60,600 60,380 C55,260 40,180 80,120 Z" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="4"/>
+<rect x="230.0" y="165.0" width="180" height="110" rx="18" fill="#eff6ff" stroke="#2563eb" stroke-width="3" opacity="0.8"/>
+<rect x="635.0" y="150.0" width="170" height="100" rx="18" fill="#f5f3ff" stroke="#7c3aed" stroke-width="3" opacity="0.8"/>
+<rect x="1145.0" y="160.0" width="150" height="100" rx="18" fill="#fef2f2" stroke="#dc2626" stroke-width="3" opacity="0.8"/>
+<rect x="995.0" y="305.0" width="170" height="110" rx="18" fill="#fff7ed" stroke="#ea580c" stroke-width="3" opacity="0.8"/>
+<rect x="1320.0" y="460.0" width="160" height="120" rx="18" fill="#ecfeff" stroke="#0891b2" stroke-width="3" opacity="0.8"/>
+<rect x="895.0" y="620.0" width="170" height="120" rx="18" fill="#fdf2f8" stroke="#db2777" stroke-width="3" opacity="0.8"/>
+<rect x="610.0" y="380.0" width="220" height="160" rx="18" fill="#dcfce7" stroke="#16a34a" stroke-width="3" opacity="0.8"/>
+<rect x="270.0" y="575.0" width="180" height="130" rx="18" fill="#f0fdf4" stroke="#059669" stroke-width="3" opacity="0.8"/>
+<rect x="150.0" y="425.0" width="140" height="110" rx="18" fill="#eef2ff" stroke="#4f46e5" stroke-width="3" opacity="0.8"/>
+<polyline points="320,220 520,210 720,200" fill="none" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+<polyline points="320,220 520,210 720,200" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="220,480 260,350 320,220" fill="none" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+<polyline points="220,480 260,350 320,220" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="320,220 500,330 720,460" fill="none" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+<polyline points="320,220 500,330 720,460" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="720,200 900,280 1080,360" fill="none" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+<polyline points="720,200 900,280 1080,360" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="720,200 970,205 1220,210" fill="none" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+<polyline points="720,200 970,205 1220,210" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="720,200 720,330 720,460" fill="none" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+<polyline points="720,200 720,330 720,460" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="1080,360 1240,440 1400,520" fill="none" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+<polyline points="1080,360 1240,440 1400,520" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="1080,360 1030,520 980,680" fill="none" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+<polyline points="1080,360 1030,520 980,680" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="360,640 290,560 220,480" fill="none" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+<polyline points="360,640 290,560 220,480" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="360,640 540,550 720,460" fill="none" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+<polyline points="360,640 540,550 720,460" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="360,640 670,660 980,680" fill="none" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+<polyline points="360,640 670,660 980,680" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="980,680 1190,600 1400,520" fill="none" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+<polyline points="980,680 1190,600 1400,520" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="980,680 850,570 720,460" fill="none" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+<polyline points="980,680 850,570 720,460" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="1220,210 1310,365 1400,520" fill="none" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+<polyline points="1220,210 1310,365 1400,520" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<polyline points="220,480 470,470 720,460" fill="none" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
+<polyline points="220,480 470,470 720,460" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+<circle cx="110" cy="180" r="10" fill="#86efac" opacity="0.7"/>
+<circle cx="110" cy="180" r="5" fill="#22c55e" opacity="0.8"/>
+<circle cx="150" cy="750" r="10" fill="#86efac" opacity="0.7"/>
+<circle cx="150" cy="750" r="5" fill="#22c55e" opacity="0.8"/>
+<circle cx="1450" cy="150" r="10" fill="#86efac" opacity="0.7"/>
+<circle cx="1450" cy="150" r="5" fill="#22c55e" opacity="0.8"/>
+<circle cx="1480" cy="780" r="10" fill="#86efac" opacity="0.7"/>
+<circle cx="1480" cy="780" r="5" fill="#22c55e" opacity="0.8"/>
+<circle cx="540" cy="110" r="10" fill="#86efac" opacity="0.7"/>
+<circle cx="540" cy="110" r="5" fill="#22c55e" opacity="0.8"/>
+<circle cx="980" cy="110" r="10" fill="#86efac" opacity="0.7"/>
+<circle cx="980" cy="110" r="5" fill="#22c55e" opacity="0.8"/>
+<circle cx="180" cy="320" r="10" fill="#86efac" opacity="0.7"/>
+<circle cx="180" cy="320" r="5" fill="#22c55e" opacity="0.8"/>
+<circle cx="1320" cy="720" r="10" fill="#86efac" opacity="0.7"/>
+<circle cx="1320" cy="720" r="5" fill="#22c55e" opacity="0.8"/>
+<circle cx="580" cy="760" r="10" fill="#86efac" opacity="0.7"/>
+<circle cx="580" cy="760" r="5" fill="#22c55e" opacity="0.8"/>
+<circle cx="820" cy="760" r="10" fill="#86efac" opacity="0.7"/>
+<circle cx="820" cy="760" r="5" fill="#22c55e" opacity="0.8"/>
+<g filter="url(#nodeShadow)"><circle cx="320" cy="220" r="22" fill="#ffffff" stroke="#2563eb" stroke-width="5"/><circle cx="320" cy="220" r="13" fill="#2563eb" opacity="0.18"/></g>
+<text x="320" y="188" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Microsoft YaHei, sans-serif" font-size="20" font-weight="700" fill="#1f2937">教学楼</text>
+<g filter="url(#nodeShadow)"><circle cx="720" cy="200" r="22" fill="#ffffff" stroke="#7c3aed" stroke-width="5"/><circle cx="720" cy="200" r="13" fill="#7c3aed" opacity="0.18"/></g>
+<text x="720" y="168" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Microsoft YaHei, sans-serif" font-size="20" font-weight="700" fill="#1f2937">图书馆</text>
+<g filter="url(#nodeShadow)"><circle cx="1220" cy="210" r="22" fill="#ffffff" stroke="#dc2626" stroke-width="5"/><circle cx="1220" cy="210" r="13" fill="#dc2626" opacity="0.18"/></g>
+<text x="1220" y="178" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Microsoft YaHei, sans-serif" font-size="20" font-weight="700" fill="#1f2937">校医院</text>
+<g filter="url(#nodeShadow)"><circle cx="1080" cy="360" r="22" fill="#ffffff" stroke="#ea580c" stroke-width="5"/><circle cx="1080" cy="360" r="13" fill="#ea580c" opacity="0.18"/></g>
+<text x="1080" y="328" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Microsoft YaHei, sans-serif" font-size="20" font-weight="700" fill="#1f2937">食堂</text>
+<g filter="url(#nodeShadow)"><circle cx="1400" cy="520" r="22" fill="#ffffff" stroke="#0891b2" stroke-width="5"/><circle cx="1400" cy="520" r="13" fill="#0891b2" opacity="0.18"/></g>
+<text x="1400" y="560" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Microsoft YaHei, sans-serif" font-size="20" font-weight="700" fill="#1f2937">实验楼</text>
+<g filter="url(#nodeShadow)"><circle cx="980" cy="680" r="22" fill="#ffffff" stroke="#db2777" stroke-width="5"/><circle cx="980" cy="680" r="13" fill="#db2777" opacity="0.18"/></g>
+<text x="980" y="720" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Microsoft YaHei, sans-serif" font-size="20" font-weight="700" fill="#1f2937">体育馆</text>
+<g filter="url(#nodeShadow)"><circle cx="720" cy="460" r="22" fill="#ffffff" stroke="#16a34a" stroke-width="5"/><circle cx="720" cy="460" r="13" fill="#16a34a" opacity="0.18"/></g>
+<text x="720" y="500" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Microsoft YaHei, sans-serif" font-size="20" font-weight="700" fill="#1f2937">操场</text>
+<g filter="url(#nodeShadow)"><circle cx="360" cy="640" r="22" fill="#ffffff" stroke="#059669" stroke-width="5"/><circle cx="360" cy="640" r="13" fill="#059669" opacity="0.18"/></g>
+<text x="360" y="680" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Microsoft YaHei, sans-serif" font-size="20" font-weight="700" fill="#1f2937">宿舍区</text>
+<g filter="url(#nodeShadow)"><circle cx="220" cy="480" r="22" fill="#ffffff" stroke="#4f46e5" stroke-width="5"/><circle cx="220" cy="480" r="13" fill="#4f46e5" opacity="0.18"/></g>
+<text x="220" y="520" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Microsoft YaHei, sans-serif" font-size="20" font-weight="700" fill="#1f2937">行政楼</text>
+<text x="60" y="70" font-family="system-ui, -apple-system, Segoe UI, Microsoft YaHei, sans-serif" font-size="32" font-weight="800" fill="#1e293b">中北大学校园 2D 示意平面图</text>
+<text x="60" y="108" font-family="system-ui, -apple-system, Segoe UI, Microsoft YaHei, sans-serif" font-size="16" fill="#64748b">示意底图：用于课程设计 Demo；正式图请替换为官方校园平面图或 3D 正射投影结果</text>
+<g transform="translate(60, 820)">
+<rect width="200" height="40" rx="10" fill="#ffffff" stroke="#e2e8f0" opacity="0.95"/>
+<line x1="15" y1="28" x2="115" y2="28" stroke="#334155" stroke-width="3"/>
+<line x1="15" y1="22" x2="15" y2="34" stroke="#334155" stroke-width="2"/>
+<line x1="115" y1="22" x2="115" y2="34" stroke="#334155" stroke-width="2"/>
+<text x="15" y="18" font-family="system-ui" font-size="12" fill="#475569">0</text>
+<text x="95" y="18" font-family="system-ui" font-size="12" fill="#475569">100 px</text>
+<text x="125" y="25" font-family="system-ui" font-size="12" fill="#64748b">(示意比例)</text>
+</g>
+<g transform="translate(1480, 80)">
+<polygon points="0,0 16,40 -16,40" fill="#1e293b"/>
+<text x="0" y="58" text-anchor="middle" font-family="system-ui" font-size="14" font-weight="700" fill="#1e293b">N</text>
+</g>
+<g transform="translate(1260, 820)">
+<rect width="300" height="40" rx="10" fill="#ffffff" stroke="#e2e8f0" opacity="0.95"/>
+<line x1="15" y1="20" x2="55" y2="20" stroke="#94a3b8" stroke-width="8" stroke-linecap="round"/>
+<text x="65" y="25" font-family="system-ui" font-size="13" fill="#475569">道路</text>
+<line x1="110" y1="20" x2="150" y2="20" stroke="#2563eb" stroke-width="6" stroke-linecap="round"/>
+<text x="160" y="25" font-family="system-ui" font-size="13" fill="#475569">高亮路径</text>
+<circle cx="230" cy="20" r="8" fill="#ffffff" stroke="#dc2626" stroke-width="3"/>
+<text x="245" y="25" font-family="system-ui" font-size="13" fill="#475569">地点</text>
+</g>
+</svg>
