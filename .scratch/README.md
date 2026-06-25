@@ -49,6 +49,6 @@ git push origin main
 ```
 ## 参考
 
-- PRD: `../PRD-校园最短路径导航系统.md`
+- PRD: `../docs/prd/PRD-校园最短路径导航系统.md`
 - 项目规范: `../CLAUDE.md`
 - 任务书: `../docs/原始资料/课程设计任务书.txt`

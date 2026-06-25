@@ -37,22 +37,20 @@
 │       └── campus-nav-prototype/
 ├── bin/                    # 编译产物
 ├── docs/                   # 文档资料
+│   ├── prd/                # 产品需求文档（master + 前端历史 PRD）
 │   ├── agents/             # Matt Pocock 技能配置
 │   ├── adr/                # 架构决策记录
 │   ├── backup/             # 备份资料
 │   ├── 原始资料/           # 老师下发的任务书、原始需求
-│   ├── handoff/            # 交接与运行说明
-│   └── reports/            # 课程设计说明书、测试报告、截图
+│   ├── handoff/            # 交接、运行说明、前端/后端集成记录
+│   ├── reports/            # 课程设计说明书、测试报告、截图
+│   └── requirements.md     # 整理后的需求文档
 ├── include/                # C 头文件
 ├── src/                    # C 源码
 │   ├── dijkstra.c          # Dijkstra 算法实现
 │   └── main.c              # 主程序与 JSON 导出
 ├── tests/                  # 测试用例
 ├── Makefile                # 构建脚本
-├── requirements.md         # 整理后的需求文档
-├── requirements.txt        # 任务书文本副本
-├── PRD-校园最短路径导航系统.md  # 产品需求文档
-├── PRD-Frontend-Visual-Polish.md  # 前端视觉升级 PRD
 ├── CONTEXT.md              # 领域上下文
 ├── CLAUDE.md               # 本文件
 └── README.md               # 项目总览
@@ -63,7 +61,7 @@
 - **最小够用**：只实现任务书要求的功能，不预加未要求的能力。
 - **算法可验证**：核心 Dijkstra / Floyd 实现需配测试用例，覆盖正常路径、不可达、异常输入。
 - **数据与界面分离**：地点、路径、算法逻辑应独立，便于后续替换为后端实现。
-- **保持原型一致**：前端页面结构、主题、地图渲染尽量与 `assets/prototype/` 保持一致；视觉调整遵循 `PRD-Frontend-Visual-Polish.md`，避免 AI 模板感。
+- **保持原型一致**：前端页面结构、主题、地图渲染尽量与 `assets/prototype/` 保持一致；视觉调整遵循 `docs/prd/PRD-Frontend-Visual-Polish.md`，避免 AI 模板感。
 - **文档随代码更新**：修改结构或新增 PRD/handoff 后，同步更新 `README.md`、`CONTEXT.md` 与 `CLAUDE.md`。
 
 ## 提交规范
@@ -122,7 +120,7 @@ bin/campus_nav.exe --export
 ## 后续可改进点
 
 - [x] 将 7 个前端页面合并为 4 个模块并统一主题。
-- [x] 完成一次去 AI 化视觉收紧（见 `PRD-Frontend-Visual-Polish.md`）。
+- [x] 完成一次去 AI 化视觉收紧（见 `docs/prd/PRD-Frontend-Visual-Polish.md`）。
 - [x] 将 `assets/prototype/campus-nav-prototype/js/app.js` 中的 mock 数据替换为读取 C 导出的 `data/routes.json`（places + edges + routes），保留 fallback。
 - [ ] 增加校园平面图底图。
 - [ ] 地点/路径的增删改从演示提示改为真实数据操作。
@@ -131,10 +129,10 @@ bin/campus_nav.exe --export
 
 ## 相关 PRD / Handoff
 
-- `PRD-Frontend-Visual-Polish.md`
-- `docs/handoff/frontend-visual-polish.md`
-- `docs/handoff/frontend-visual-polish-progress-handoff.md`
-- `docs/reports/frontend-polish-investigation.md`
+- `docs/prd/PRD-校园最短路径导航系统.md` — 产品需求文档（master）
+- `docs/prd/PRD-Frontend-Visual-Polish.md`、`docs/prd/PRD-Polish-Frontend.md` — 前端历史 PRD
+- `docs/handoff/frontend-polish-log.md` — 前端改造记录（合并存档）
+- `docs/handoff/backend-integration.md` — 后端与数据集成记录
 
 ## Agent skills
 

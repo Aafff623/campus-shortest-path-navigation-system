@@ -36,8 +36,8 @@
 
 ## 相关文件
 
-- `PRD-Frontend-Visual-Polish.md`
-- `docs/handoff/frontend-visual-polish-progress-handoff.md`
+- `docs/prd/PRD-Frontend-Visual-Polish.md`
+- `docs/handoff/frontend-polish-log.md`
 - `assets/prototype/campus-nav-prototype/css/styles.css`
 - `assets/prototype/campus-nav-prototype/index.html`
 - `assets/prototype/campus-nav-prototype/query.html`

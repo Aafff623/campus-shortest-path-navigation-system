@@ -13,6 +13,8 @@
 
 - `git-workflow.md` — Git 提交、review、push 工作流
 - `运行说明.md` — 编译、运行、导出 JSON、打开前端的步骤
+- `frontend-polish-log.md` — 前端改造记录（调研→IA合并→视觉收紧→风格对齐，合并存档）
+- `backend-integration.md` — 后端数据导出与 2D 校园图叠加集成记录
 
 ## 待补充
 

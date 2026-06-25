@@ -134,7 +134,7 @@ C 后端 (Dijkstra)
 | 阶段 | 状态 | 说明 |
 |---|---|---|
 | 前端 5 页面与主题统一 | ✅ 完成 | 首页 / 查询 / 数据 / 说明 / 坐标标定 |
-| 去 AI 化视觉收紧 | ✅ 完成 | 见 `PRD-Frontend-Visual-Polish.md` |
+| 去 AI 化视觉收紧 | ✅ 完成 | 见 `docs/prd/PRD-Frontend-Visual-Polish.md` |
 | 真实 2D 校园图 overlay | ✅ 完成 | 官方平面图 + 第一轮坐标标定 |
 | 首页卡片撑满视口 | ✅ 完成 | layout fix |
 | 地点 / 路径增删改真实数据 | 🔜 待实现 | 当前为演示提示，未持久化 |
@@ -147,11 +147,11 @@ C 后端 (Dijkstra)
 
 | 文档 | 说明 |
 |---|---|
-| [`PRD-校园最短路径导航系统.md`](PRD-校园最短路径导航系统.md) | 产品需求文档 |
-| [`PRD-Frontend-Visual-Polish.md`](PRD-Frontend-Visual-Polish.md) | 前端视觉升级 PRD |
+| [`docs/prd/PRD-校园最短路径导航系统.md`](docs/prd/PRD-校园最短路径导航系统.md) | 产品需求文档（master） |
+| [`docs/prd/PRD-Frontend-Visual-Polish.md`](docs/prd/PRD-Frontend-Visual-Polish.md) | 前端视觉升级 PRD（历史） |
 | [`docs/handoff/运行说明.md`](docs/handoff/运行说明.md) | 运行说明与端口配置 |
-| [`docs/handoff/2d-map-overlay-handoff.md`](docs/handoff/2d-map-overlay-handoff.md) | 2D 校园图 overlay 交接 |
-| [`docs/reports/frontend-polish-investigation.md`](docs/reports/frontend-polish-investigation.md) | 前端优化调研报告 |
+| [`docs/handoff/backend-integration.md`](docs/handoff/backend-integration.md) | 后端与数据集成（导出 + 2D 地图叠加） |
+| [`docs/handoff/frontend-polish-log.md`](docs/handoff/frontend-polish-log.md) | 前端改造记录（调研→实施→验收） |
 | [`CLAUDE.md`](CLAUDE.md) | 项目规范与开发约定 |
 | [`CONTEXT.md`](CONTEXT.md) | 领域上下文与架构决策 |
 

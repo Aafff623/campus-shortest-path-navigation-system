@@ -3,7 +3,7 @@
 > 项目：校园最短路径导航系统
 > 日期：2026-06-23
 > 状态：Draft
-> 关联调研：`docs/reports/frontend-polish-investigation.md`
+> 关联调研：`docs/handoff/frontend-polish-log.md`（调研已并入 §1）
 
 ## 1. Summary
 
@@ -212,8 +212,8 @@ docs.html       系统说明：tab 切换 [系统功能] [算法说明]
 
 | 任务 | 文件 | 状态 |
 |------|------|------|
-| 调研报告 | `docs/reports/frontend-polish-investigation.md` | ✅ |
-| PRD | `PRD-Polish-Frontend.md` | ✅ 本文档 |
+| 调研报告 | `docs/handoff/frontend-polish-log.md`（已并入） | ✅ |
+| PRD | `docs/prd/PRD-Polish-Frontend.md` | ✅ 本文档 |
 | Plan | （下一步） | ⏳ |
 | 创建 4 个新页面 HTML | `assets/prototype/campus-nav-prototype/*.html` | ⏳ |
 | 添加 tab / icon 样式 | `assets/prototype/campus-nav-prototype/css/styles.css` | ⏳ |
