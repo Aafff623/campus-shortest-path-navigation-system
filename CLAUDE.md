@@ -2,6 +2,24 @@
 
 本项目为中北大学软件学院《数据结构》课程设计：校园最短路径导航系统。
 
+## 接手与阅读顺序（Agent / 新成员）
+
+第一次接手本项目，按以下顺序读，即可建立完整认知：
+
+1. **`CLAUDE.md`（本文件）** — 项目规范：技术栈、目录结构、开发约定、提交规范、Git 工作流。
+2. **`CONTEXT.md`** — 领域上下文与关键架构决策。
+3. **`docs/prd/`** — 产品需求：`PRD-校园最短路径导航系统.md`（master）+ 两份前端历史 PRD。
+4. **`docs/handoff/`** — 运行与集成：
+   - `快速上手.md` — 在另一台电脑从零跑起来（环境安装 + 常见坑），**只想运行先看这份**。
+   - `运行说明.md` — 编译 / 运行 / 导出 / 前端命令细节。
+   - `backend-integration.md` — C 导出 `routes.json` + 2D 校园图叠加。
+   - `frontend-polish-log.md` — 前端改造时间线（调研→IA 合并→视觉收紧→风格对齐）。
+   - `git-workflow.md` — commit / review / push 流程。
+5. **`docs/adr/`** — 架构决策记录（为什么这么改）。
+6. **`docs/agents/`** — Agent skills 配置：`issue-tracker.md`、`triage-labels.md`、`domain.md`。
+
+> 改代码前，先读对应层的 PRD / handoff；只想把项目跑起来，直接看 `docs/handoff/快速上手.md`。
+
 ## 项目目标
 
 实现一个可运行的校园最短路径导航应用，掌握数据结构与算法的设计方法，按软件开发规范完成小型应用软件。
